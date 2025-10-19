@@ -1,0 +1,142 @@
+{
+  "weapons": [
+    {
+      "name": "Bit",
+      "stats": {
+        "Damage": 2,
+        "Added Damage Mult": 1,
+        "Fire Rate": 1,
+        "Aim Cone": 5,
+        "Speed": 15,
+        "Scale": 0.3,
+        "Knockback": 5,
+        "Projectiles": 1,
+        "Bounces": 0,
+        "Pierces": 0,
+        "DPS": 2
+      }
+    },
+    {
+      "name": "Burst",
+      "stats": {
+        "Damage": 1,
+        "Fire Rate": 1,
+        "Aim Cone": 15,
+        "Speed": 20,
+        "Scale": 0.3,
+        "Knockback": 2,
+        "Projectiles": 3,
+        "Bounces": 0,
+        "Pierces": 0,
+        "DPS": 3
+      }
+    },
+    {
+      "name": "Blue Hole",
+      "stats": {
+        "Damage": 6,
+        "Fire Rate": 0.5,
+        "Aim Cone": 0,
+        "Speed": 2,
+        "Scale": 0.35,
+        "Knockback": 5,
+        "Projectiles": 1,
+        "Bounces": 0,
+        "Pierces": 0,
+        "DPS": 1
+      }
+    },
+    {
+      "name": "Radius",
+      "stats": {
+        "Damage": 0.8,
+        "Fire Rate": 0.6,
+        "Aim Cone": 15,
+        "Speed": 5,
+        "Scale": 1,
+        "Knockback": 4,
+        "Projectiles": 5,
+        "Bounces": 0,
+        "Pierces": 0,
+        "DPS": {
+          "All 5 Hit": 2.4,
+          "Single Hit": 0.48
+        }
+      }
+    },
+    {
+      "name": "Bounce",
+      "stats": {
+        "Damage": 0.6,
+        "Fire Rate": 1,
+        "Speed": 8,
+        "Scale": 0.2,
+        "Knockback": 2.5,
+        "Projectiles": 1,
+        "Bounces": 3,
+        "Pierces": 0,
+        "DPS": {
+          "3 Enemies": 7.5,
+          "1 Enemy": 2.5
+        }
+      }
+    },
+    {
+      "name": "Shotgun",
+      "stats": {
+        "Damage": 1,
+        "Fire Rate": 0.8,
+        "Speed": 20,
+        "Scale": 0.2,
+        "Knockback": 5,
+        "Pellets": 3,
+        "Burst": 1,
+        "Bounces": 0,
+        "Pierces": false
+      }
+    },
+    {
+      "name": "Shuriken",
+      "stats": {
+        "Damage": 0.3,
+        "Fire Rate": 3,
+        "Speed": 18,
+        "Scale": 0.07,
+        "Knockback": 1,
+        "Pellets": 1,
+        "Burst": 2,
+        "Bounces": 0,
+        "Pierces": false
+      }
+    },
+    {
+      "name": "Ballista",
+      "stats": {
+        "Damage": 3.5,
+        "Fire Rate": 0.55,
+        "Speed": 6,
+        "Scale": 0.3,
+        "Knockback": 5,
+        "Pellets": 1,
+        "Burst": 1,
+        "Bounces": 0,
+        "Pierces": true,
+        "Num of Pierces": 3
+      }
+    },
+    {
+      "name": "Flamethrower",
+      "stats": {
+        "Damage": 0.01,
+        "Fire Rate": 50,
+        "Speed": 20,
+        "Scale": 0.1,
+        "Knockback": 1,
+        "Pellets": 1,
+        "Burst": 1,
+        "Bounces": 0,
+        "Pierces": false
+      }
+    }
+  ]
+}

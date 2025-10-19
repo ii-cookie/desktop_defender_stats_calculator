@@ -1,0 +1,328 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Defender: Stats Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-4 max-w-4xl">
+        <h1 class="text-3xl font-bold text-center mb-6">Desktop Defender: Stats Calculator</h1>
+
+        <!-- Weapons Section -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Select Weapon</h2>
+            <div id="weapons-container" class="grid grid-cols-2 sm:grid-cols-3 gap-2"></div>
+        </section>
+
+        <!-- Loot Section -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Select Loot</h2>
+            <div id="loot-container" class="space-y-2"></div>
+        </section>
+
+        <!-- Input Levels Section -->
+        <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Input Levels</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium">Level</label>
+                    <input type="number" id="level" value="30" min="1" class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Damage Level</label>
+                    <input type="number" id="damage_level" value="100" min="1" class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Flat Level</label>
+                    <input type="number" id="flat_level" value="50" min="1" class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Extra Projectile Level</label>
+                    <input type="number" id="extra_projectile_level" value="3" min="1" class="w-full p-2 border rounded">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium">Firerate Level</label>
+                    <input type="number" id="firerate_level" value="100" min="1" class="w-full p-2 border rounded">
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculate Button -->
+        <div class="text-center mb-8">
+            <button id="calculate-btn" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">Calculate</button>
+        </div>
+
+        <!-- Results Section -->
+        <section id="results" class="hidden">
+            <h2 class="text-2xl font-semibold mb-4">Results</h2>
+            <div class="bg-white p-4 rounded shadow-md">
+                <p><strong>Damage:</strong> <span id="result-damage">0</span></p>
+                <p><strong>Projectiles per Shot:</strong> <span id="result-projectiles">0</span></p>
+                <p><strong>Firerate:</strong> <span id="result-firerate">0</span></p>
+                <p><strong>Total Damage per Shot:</strong> <span id="result-total-damage">0</span></p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Embedded JSON data
+        const data = {
+            "weapons": [
+                {"name": "Bit", "stats": {"Damage": 2, "Added Damage Mult": 1, "Fire Rate": 1, "Aim Cone": 5, "Speed": 15, "Scale": 0.3, "Knockback": 5, "Projectiles": 1, "Bounces": 0, "Pierces": 0, "DPS": 2}},
+                {"name": "Burst", "stats": {"Damage": 1, "Fire Rate": 1, "Aim Cone": 15, "Speed": 20, "Scale": 0.3, "Knockback": 2, "Projectiles": 3, "Bounces": 0, "Pierces": 0, "DPS": 3}},
+                {"name": "Blue Hole", "stats": {"Damage": 6, "Fire Rate": 0.5, "Aim Cone": 0, "Speed": 2, "Scale": 0.35, "Knockback": 5, "Projectiles": 1, "Bounces": 0, "Pierces": 0, "DPS": 1}},
+                {"name": "Radius", "stats": {"Damage": 0.8, "Fire Rate": 0.6, "Aim Cone": 15, "Speed": 5, "Scale": 1, "Knockback": 4, "Projectiles": 5, "Bounces": 0, "Pierces": 0, "DPS": {"All 5 Hit": 2.4, "Single Hit": 0.48}}},
+                {"name": "Bounce", "stats": {"Damage": 0.6, "Fire Rate": 1, "Speed": 8, "Scale": 0.2, "Knockback": 2.5, "Projectiles": 1, "Bounces": 3, "Pierces": 0, "DPS": {"3 Enemies": 7.5, "1 Enemy": 2.5}}},
+                {"name": "Shotgun", "stats": {"Damage": 1, "Fire Rate": 0.8, "Speed": 20, "Scale": 0.2, "Knockback": 5, "Pellets": 3, "Burst": 1, "Bounces": 0, "Pierces": false}},
+                {"name": "Shuriken", "stats": {"Damage": 0.3, "Fire Rate": 3, "Speed": 18, "Scale": 0.07, "Knockback": 1, "Pellets": 1, "Burst": 2, "Bounces": 0, "Pierces": false}},
+                {"name": "Ballista", "stats": {"Damage": 3.5, "Fire Rate": 0.55, "Speed": 6, "Scale": 0.3, "Knockback": 5, "Pellets": 1, "Burst": 1, "Bounces": 0, "Pierces": true, "Num of Pierces": 3}},
+                {"name": "Flamethrower", "stats": {"Damage": 0.01, "Fire Rate": 50, "Speed": 20, "Scale": 0.1, "Knockback": 1, "Pellets": 1, "Burst": 1, "Bounces": 0, "Pierces": false}}
+            ],
+            "loot": {
+                "C": [
+                    {"name": "Ancient Drawback", "stats": {"Money Obtained": -0.10, "XP Obtained": 0.35}},
+                    {"name": "Trained Muscles", "stats": {"Shot Damage": 10}},
+                    {"name": "Materials", "stats": {"Projectile Size": 0.35}},
+                    {"name": "Multishot", "stats": {"Projectile Shot": 1, "Projectile Damage": -0.50}},
+                    {"name": "Quick Moves", "stats": {"Fire Rate": 0.40, "Knockback": -0.50}},
+                    {"name": "Health Aura", "stats": {"Max HP": 20}},
+                    {"name": "Wealth Texts", "stats": {"Money Obtained": 0.35}},
+                    {"name": "Sight of Light", "stats": {"Projectile Speed": 0.50}},
+                    {"name": "Bug of Power", "stats": {"Projectile Damage": 0.45}},
+                    {"name": "Glass Cannon", "stats": {"Max HP": -10, "Knockback": 0.40}}
+                ],
+                "B": [
+                    {"name": "Living Projectile", "stats": {"Projectile Shot": 1, "Fire Rate": -0.20}},
+                    {"name": "Sack", "stats": {"Money Obtained": 0.45}},
+                    {"name": "Determination", "stats": {"Projectile Damage": 0.60}},
+                    {"name": "Spectral Channeling", "stats": {"Money Obtained": 0.20, "XP Obtained": 0.20}},
+                    {"name": "Wind Golem", "stats": {"Knockback": 0.50}},
+                    {"name": "Launch Staff", "stats": {"Projectile Speed": 0.45}},
+                    {"name": "Steady Hand", "stats": {"Aim Cone": -35}}
+                ],
+                "D": [
+                    {"name": "Hand of Greed", "stats": {"Money Obtained": 0.35}},
+                    {"name": "Bear Power", "stats": {"Projectile Speed": 0.35}},
+                    {"name": "Split Shot", "stats": {"Projectile Shot": 1, "Projectile Damage": -0.70}},
+                    {"name": "Wind Glove", "stats": {"Knockback": 0.35}},
+                    {"name": "Life Necklace", "stats": {"Max HP": 10}},
+                    {"name": "Scientific Knowledge", "stats": {"XP Obtained": 0.25}}
+                ],
+                "E": [
+                    {"name": "Sharp Shoot", "stats": {"Shot Damage": 1.5}},
+                    {"name": "Keen Eye", "stats": {"Aim Cone": -5}},
+                    {"name": "Berserk DNA", "stats": {"Aim Cone": 20, "Shot Damage": 3}},
+                    {"name": "Strong Potion", "stats": {"Projectile Damage": 0.20}},
+                    {"name": "Heavy Weapon", "stats": {"Shot Damage": 5, "Fire Rate": -0.25}},
+                    {"name": "Speed Rune", "stats": {"Fire Rate": 0.15}},
+                    {"name": "Rich Ghost", "stats": {"Money Obtained": 15}},
+                    {"name": "Water Mend", "stats": {"Max HP": 5}}
+                ]
+            }
+        };
+
+        // Ported Python functions to JavaScript
+        function damage_percent(level) {
+            return 0.0000103078 * Math.pow(level, 3) - 0.00309212 * Math.pow(level, 2) + 0.309199 * level - 0.306333;
+        }
+
+        function flat_damage(level) {
+            return (50 / 49) * level - 50 / 49;
+        }
+
+        function damage_mult(level) {
+            if (level < 4) return 1;
+            else if (level < 10) return 1.2;
+            else if (level < 21) return 1.2 ** 2;
+            else return 1.2 ** 3;
+        }
+
+        function damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage) {
+            return (weapon_damage * (1 + damage_percent(damage_level) + loot_percentage) +
+                    (flat_damage(flat_level) + loot_damage) * weapon_added_mult) * damage_mult(level);
+        }
+
+        function firerate_upgrade(level) {
+            return (7.73341e-7) * Math.pow(level, 3) - 0.000231949 * Math.pow(level, 2) + 0.0231915 * level - 0.0229862;
+        }
+
+        function firerate(weapon_firerate, firerate_level, loot_firerate) {
+            return (1 / weapon_firerate) * (1 - (firerate_upgrade(firerate_level) + loot_firerate));
+        }
+
+        function projectiles_per_shot(extra_projectile_level, loot_projectile) {
+            return 1 + Math.ceil((extra_projectile_level - 1) * 1.5) + loot_projectile;
+        }
+
+        function total_damage_per_shot(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage, extra_projectile_level, loot_projectile) {
+            return damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage) * projectiles_per_shot(extra_projectile_level, loot_projectile);
+        }
+
+        function get_weapon_damage(weapon) {
+            return weapon?.stats?.Damage || 0;
+        }
+
+        function get_weapon_added_mult(weapon) {
+            if (weapon?.name?.toLowerCase() === 'flamethrower') return 0.1;
+            return weapon?.stats?.['Added Damage Mult'] || 1;
+        }
+
+        function get_loot_percentage(loots) {
+            return loots.reduce((sum, loot) => sum + (loot?.stats?.['Projectile Damage'] || 0), 0);
+        }
+
+        function get_loot_damage(loots) {
+            return loots.reduce((sum, loot) => sum + (loot?.stats?.['Shot Damage'] || 0), 0);
+        }
+
+        function get_loot_projectile(loots) {
+            return loots.reduce((sum, loot) => sum + (loot?.stats?.['Projectile Shot'] || 0), 0);
+        }
+
+        function get_weapon_fire_rate(weapon) {
+            return weapon?.stats?.['Fire Rate'] || 0;
+        }
+
+        function get_loot_fire_rate(loots) {
+            return loots.reduce((sum, loot) => sum + (loot?.stats?.['Fire Rate'] || 0), 0);
+        }
+
+        // Initialize weapons
+        const weaponsContainer = document.getElementById('weapons-container');
+        let selectedWeapon = null;
+        data.weapons.forEach(weapon => {
+            const button = document.createElement('button');
+            button.textContent = weapon.name;
+            button.className = 'p-2 border rounded bg-gray-200 hover:bg-gray-300';
+            button.addEventListener('click', () => {
+                document.querySelectorAll('#weapons-container button').forEach(btn => btn.className = 'p-2 border rounded bg-gray-200 hover:bg-gray-300');
+                button.className = 'p-2 border rounded bg-blue-600 text-white';
+                selectedWeapon = weapon;
+            });
+            weaponsContainer.appendChild(button);
+        });
+
+        // Initialize loot
+        const lootContainer = document.getElementById('loot-container');
+        const lootQuantities = {};
+        const allLoots = Object.values(data.loot).flat();
+        allLoots.forEach(loot => {
+            lootQuantities[loot.name] = 0;
+            const div = document.createElement('div');
+            div.className = 'flex items-center justify-between bg-white p-2 rounded shadow';
+            div.innerHTML = `
+                <span>${loot.name} (Rarity: ${Object.keys(data.loot).find(key => data.loot[key].includes(loot))})</span>
+                <div class="flex items-center">
+                    <button class="minus-btn px-2 py-1 bg-red-500 text-white rounded-l" data-loot="${loot.name}">-</button>
+                    <span class="px-4" id="quantity-${loot.name}">0</span>
+                    <button class="plus-btn px-2 py-1 bg-green-500 text-white rounded-r" data-loot="${loot.name}">+</button>
+                </div>
+            `;
+            lootContainer.appendChild(div);
+        });
+
+        // Handle plus/minus buttons
+        lootContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('plus-btn')) {
+                const lootName = e.target.dataset.loot;
+                lootQuantities[lootName]++;
+                document.getElementById(`quantity-${lootName}`).textContent = lootQuantities[lootName];
+            } else if (e.target.classList.contains('minus-btn')) {
+                const lootName = e.target.dataset.loot;
+                if (lootQuantities[lootName] > 0) {
+                    lootQuantities[lootName]--;
+                    document.getElementById(`quantity-${lootName}`).textContent = lootQuantities[lootName];
+                }
+            }
+        });
+
+        // Handle calculate button
+        document.getElementById('calculate-btn').addEventListener('click', () => {
+            if (!selectedWeapon) {
+                alert('Please select a weapon.');
+                return;
+            }
+
+            // Gather selected loots
+            const selectedLoots = [];
+            for (const [lootName, quantity] of Object.entries(lootQuantities)) {
+                if (quantity > 0) {
+                    const loot = allLoots.find(l => l.name === lootName);
+                    for (let i = 0; i < quantity; i++) {
+                        selectedLoots.push(loot);
+                    }
+                }
+            }
+
+            // Get input values
+            const level = parseFloat(document.getElementById('level').value) || 1;
+            const damage_level = parseFloat(document.getElementById('damage_level').value) || 1;
+            const flat_level = parseFloat(document.getElementById('flat_level').value) || 1;
+            const extra_projectile_level = parseFloat(document.getElementById('extra_projectile_level').value) || 1;
+            const firerate_level = parseFloat(document.getElementById('firerate_level').value) || 1;
+
+            // Calculate stats
+            const weapon_damage = get_weapon_damage(selectedWeapon);
+            const weapon_added_mult = get_weapon_added_mult(selectedWeapon);
+            const loot_percentage = get_loot_percentage(selectedLoots);
+            const loot_damage = get_loot_damage(selectedLoots);
+            const loot_projectile = get_loot_projectile(selectedLoots);
+            const weapon_firerate = get_weapon_fire_rate(selectedWeapon);
+            const loot_firerate = get_loot_fire_rate(selectedLoots);
+
+            const dmg = damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage);
+            const proj = projectiles_per_shot(extra_projectile_level, loot_projectile);
+            const fr = firerate(weapon_firerate, firerate_level, loot_firerate);
+            const total_dmg = total_damage_per_shot(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage, extra_projectile_level, loot_projectile);
+
+            // Display results
+            document.getElementById('result-damage').textContent = dmg.toFixed(2);
+            document.getElementById('result-projectiles').textContent = proj;
+            document.getElementById('result-firerate').textContent = fr.toFixed(2);
+            document.getElementById('result-total-damage').textContent = total_dmg.toFixed(2);
+            document.getElementById('results').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
