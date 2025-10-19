@@ -106,6 +106,7 @@
                 <p class="text-gray-100"><strong>Projectiles per Shot:</strong> <span id="result-projectiles">0</span></p>
                 <p class="text-gray-100"><strong>Firerate:</strong> <span id="result-firerate">0</span></p>
                 <p class="text-gray-100"><strong>Total Damage per Shot:</strong> <span id="result-total-damage">0</span></p>
+                <p class="text-gray-100"><strong>Damage per Second:</strong> <span id="result-dps">0</span></p>
             </div>
         </section>
     </div>
@@ -193,7 +194,9 @@
         }
 
         function firerate(weapon_firerate, firerate_level, loot_firerate) {
-            return (1 / weapon_firerate) * (1 - (firerate_upgrade(firerate_level) + loot_firerate));
+            const calculatedFirerate = (1 / weapon_firerate) * (1 - (firerate_upgrade(firerate_level) + loot_firerate));
+            const cappedFirerate = Math.max(calculatedFirerate, 0.1);
+            return { display: calculatedFirerate, capped: cappedFirerate };
         }
 
         function projectiles_per_shot(extra_projectile_level, loot_projectile) {
@@ -202,6 +205,10 @@
 
         function total_damage_per_shot(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage, extra_projectile_level, loot_projectile) {
             return damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage) * projectiles_per_shot(extra_projectile_level, loot_projectile);
+        }
+
+        function damage_per_second(total_damage, firerate) {
+            return total_damage / firerate;
         }
 
         function get_weapon_damage(weapon) {
@@ -334,12 +341,14 @@
             const proj = projectiles_per_shot(extra_projectile_level, loot_projectile);
             const fr = firerate(weapon_firerate, firerate_level, loot_firerate);
             const total_dmg = total_damage_per_shot(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage, extra_projectile_level, loot_projectile);
+            const dps = damage_per_second(total_dmg, fr.capped);
 
-            // Display results
-            document.getElementById('result-damage').textContent = dmg.toFixed(2);
-            document.getElementById('result-projectiles').textContent = proj;
-            document.getElementById('result-firerate').textContent = fr.toFixed(2);
-            document.getElementById('result-total-damage').textContent = total_dmg.toFixed(2);
+            // Display results with 6 decimal places
+            document.getElementById('result-damage').textContent = dmg.toFixed(6);
+            document.getElementById('result-projectiles').textContent = proj.toFixed(6);
+            document.getElementById('result-firerate').textContent = fr.display < 0.1 ? `${fr.display.toFixed(6)} (0.1 is the minimum)` : fr.display.toFixed(6);
+            document.getElementById('result-total-damage').textContent = total_dmg.toFixed(6);
+            document.getElementById('result-dps').textContent = dps.toFixed(6);
             document.getElementById('results').classList.remove('hidden');
         });
     </script>
