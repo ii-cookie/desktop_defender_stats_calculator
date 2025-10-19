@@ -243,6 +243,50 @@
         // Initialize weapons
         const weaponsContainer = document.getElementById('weapons-container');
         let selectedWeapon = null;
+
+        // Load saved settings
+        function loadSavedSettings() {
+            // Load selected weapon
+            const savedWeaponName = localStorage.getItem('selectedWeapon');
+            if (savedWeaponName) {
+                selectedWeapon = data.weapons.find(weapon => weapon.name === savedWeaponName);
+                if (selectedWeapon) {
+                    const buttons = weaponsContainer.querySelectorAll('button');
+                    buttons.forEach(btn => {
+                        if (btn.textContent === savedWeaponName) {
+                            btn.className = 'p-2 border rounded bg-blue-600 text-white border-blue-500';
+                        } else {
+                            btn.className = 'p-2 border rounded bg-gray-600 hover:bg-gray-500 text-gray-100 border-gray-500';
+                        }
+                    });
+                }
+            }
+
+            // Load loot slots
+            const savedLootSlots = JSON.parse(localStorage.getItem('lootSlots') || '[]');
+            savedLootSlots.forEach((lootName, index) => {
+                if (lootName) {
+                    const loot = Object.values(data.loot).flat().find(l => l.name === lootName);
+                    if (loot && index < 9) {
+                        lootSlots[index] = loot;
+                        const slot = lootGrid.children[index];
+                        slot.innerHTML = `
+                            <img src="${loot.icon}" alt="${loot.name} Icon" class="slot-image">
+                        `;
+                    }
+                }
+            });
+
+            // Load input values
+            const inputFields = ['level', 'damage_level', 'flat_level', 'extra_projectile_level', 'firerate_level'];
+            inputFields.forEach(id => {
+                const savedValue = localStorage.getItem(id);
+                if (savedValue !== null) {
+                    document.getElementById(id).value = savedValue;
+                }
+            });
+        }
+
         data.weapons.forEach(weapon => {
             const button = document.createElement('button');
             button.textContent = weapon.name;
@@ -251,6 +295,7 @@
                 document.querySelectorAll('#weapons-container button').forEach(btn => btn.className = 'p-2 border rounded bg-gray-600 hover:bg-gray-500 text-gray-100 border-gray-500');
                 button.className = 'p-2 border rounded bg-blue-600 text-white border-blue-500';
                 selectedWeapon = weapon;
+                localStorage.setItem('selectedWeapon', weapon.name);
             });
             weaponsContainer.appendChild(button);
         });
@@ -299,9 +344,21 @@
                 slot.innerHTML = `
                     <img src="${loot.icon}" alt="${loot.name} Icon" class="slot-image">
                 `;
+                // Save loot slots
+                const lootNames = lootSlots.map(loot => loot ? loot.name : null);
+                localStorage.setItem('lootSlots', JSON.stringify(lootNames));
                 lootPopup.style.display = 'none';
             });
             lootPopupContent.appendChild(card);
+        });
+
+        // Save input values on change
+        const inputFields = ['level', 'damage_level', 'flat_level', 'extra_projectile_level', 'firerate_level'];
+        inputFields.forEach(id => {
+            const input = document.getElementById(id);
+            input.addEventListener('input', () => {
+                localStorage.setItem(id, input.value);
+            });
         });
 
         // Close popup when clicking outside
@@ -351,6 +408,9 @@
             document.getElementById('result-dps').textContent = dps.toFixed(6);
             document.getElementById('results').classList.remove('hidden');
         });
+
+        // Load saved settings on page load
+        loadSavedSettings();
     </script>
 </body>
 </html>
