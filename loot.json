@@ -2,7 +2,7 @@
   "loot": {
     "C": [
       {
-        "icon": "Ancient Drawback",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/4/4b/AD_Icon.png/80px-AD_Icon.png",
         "name": "Ancient Drawback",
         "stats": {
           "Money Obtained": -0.10,
@@ -10,21 +10,21 @@
         }
       },
       {
-        "icon": "Trained Muscles",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c2/TM_Icon.png/80px-TM_Icon.png",
         "name": "Trained Muscles",
         "stats": {
           "Shot Damage": 10
         }
       },
       {
-        "icon": "Materials",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/2/23/MT_Icon.png/80px-MT_Icon.png",
         "name": "Materials",
         "stats": {
           "Projectile Size": 0.35
         }
       },
       {
-        "icon": "Multishot",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/d/d0/MS_Icon.png/80px-MS_Icon.png",
         "name": "Multishot",
         "stats": {
           "Projectile Shot": 1,
@@ -32,7 +32,7 @@
         }
       },
       {
-        "icon": "Quick Moves",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/8/84/QM_Icon.png/80px-QM_Icon.png",
         "name": "Quick Moves",
         "stats": {
           "Fire Rate": 0.40,
@@ -40,35 +40,35 @@
         }
       },
       {
-        "icon": "Health Aura",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/a/a1/HAu_Icon.png/80px-HAu_Icon.png",
         "name": "Health Aura",
         "stats": {
           "Max HP": 20
         }
       },
       {
-        "icon": "Wealth Texts",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/a/a3/WTe_Icon.png/80px-WTe_Icon.png",
         "name": "Wealth Texts",
         "stats": {
           "Money Obtained": 0.35
         }
       },
       {
-        "icon": "Sight of Light",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/1/17/SoL_Icon.png/80px-SoL_Icon.png",
         "name": "Sight of Light",
         "stats": {
           "Projectile Speed": 0.50
         }
       },
       {
-        "icon": "Bug of Power",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/2/29/BoP_Icon.png/80px-BoP_Icon.png",
         "name": "Bug of Power",
         "stats": {
           "Projectile Damage": 0.45
         }
       },
       {
-        "icon": "Glass Cannon",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/9/9f/GC_Icon.png/80px-GC_Icon.png",
         "name": "Glass Cannon",
         "stats": {
           "Max HP": -10,
@@ -78,7 +78,7 @@
     ],
     "B": [
       {
-        "icon": "Living Projectile",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/6f/Scaler.png/80px-Scaler.png",
         "name": "Living Projectile",
         "stats": {
           "Projectile Shot": 1,
@@ -86,21 +86,21 @@
         }
       },
       {
-        "icon": "Sack",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/1/11/Sk.png/80px-Sk.png",
         "name": "Sack",
         "stats": {
           "Money Obtained": 0.45
         }
       },
       {
-        "icon": "Determination",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c7/Deter.png/80px-Deter.png",
         "name": "Determination",
         "stats": {
           "Projectile Damage": 0.60
         }
       },
       {
-        "icon": "Spectral Channeling",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/9/9a/SCh.png/80px-SCh.png",
         "name": "Spectral Channeling",
         "stats": {
           "Money Obtained": 0.20,
@@ -108,21 +108,21 @@
         }
       },
       {
-        "icon": "Wind Golem",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/6b/WGo.png/80px-WGo.png",
         "name": "Wind Golem",
         "stats": {
           "Knockback": 0.50
         }
       },
       {
-        "icon": "Launch Staff",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/1/1e/LSt.png/80px-LSt.png",
         "name": "Launch Staff",
         "stats": {
           "Projectile Speed": 0.45
         }
       },
       {
-        "icon": "Steady Hand",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c8/SHan.png/80px-SHan.png",
         "name": "Steady Hand",
         "stats": {
           "Aim Cone": -35
@@ -131,21 +131,21 @@
     ],
     "D": [
       {
-        "icon": "Hand of Greed",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/2/20/Hog_Icon.png/80px-Hog_Icon.png",
         "name": "Hand of Greed",
         "stats": {
           "Money Obtained": 0.35
         }
       },
       {
-        "icon": "Bear Power",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c7/BP_Icon.png/80px-BP_Icon.png",
         "name": "Bear Power",
         "stats": {
           "Projectile Speed": 0.35
         }
       },
       {
-        "icon": "Split Shot",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/67/Sps_Icon.png/80px-Sps_Icon.png",
         "name": "Split Shot",
         "stats": {
           "Projectile Shot": 1,
@@ -153,21 +153,21 @@
         }
       },
       {
-        "icon": "Wind Glove",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/a/aa/WG_Icon.png/80px-WG_Icon.png",
         "name": "Wind Glove",
         "stats": {
           "Knockback": 0.35
         }
       },
       {
-        "icon": "Life Necklace",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/67/LN.png/80px-LN.png",
         "name": "Life Necklace",
         "stats": {
           "Max HP": 10
         }
       },
       {
-        "icon": "Scientific Knowledge",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/e/ee/SK.png/80px-SK.png",
         "name": "Scientific Knowledge",
         "stats": {
           "XP Obtained": 0.25
@@ -176,21 +176,21 @@
     ],
     "E": [
       {
-        "icon": "Sharp Shoot",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/f/f3/Shs_Icon.png/80px-Shs_Icon.png",
         "name": "Sharp Shoot",
         "stats": {
           "Shot Damage": 1.5
         }
       },
       {
-        "icon": "Keen Eye",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/7/78/Kee_Icon.png/80px-Kee_Icon.png",
         "name": "Keen Eye",
         "stats": {
           "Aim Cone": -5
         }
       },
       {
-        "icon": "Berserk DNA",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/f/fe/BDNA_Icon.png/80px-BDNA_Icon.png",
         "name": "Berserk DNA",
         "stats": {
           "Aim Cone": 20,
@@ -198,14 +198,14 @@
         }
       },
       {
-        "icon": "Strong Potion",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/a/af/Stp_Icon.png/80px-Stp_Icon.png",
         "name": "Strong Potion",
         "stats": {
           "Projectile Damage": 0.20
         }
       },
       {
-        "icon": "Heavy Weapon",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/2/24/Hew_Icon.png/80px-Hew_Icon.png",
         "name": "Heavy Weapon",
         "stats": {
           "Shot Damage": 5,
@@ -213,21 +213,21 @@
         }
       },
       {
-        "icon": "Speed Rune",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/b/b1/Sper_Icon.png/80px-Sper_Icon.png",
         "name": "Speed Rune",
         "stats": {
           "Fire Rate": 0.15
         }
       },
       {
-        "icon": "Rich Ghost",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/4/40/Rgho_Icon.png/80px-Rgho_Icon.png",
         "name": "Rich Ghost",
         "stats": {
           "Money Obtained": 15
         }
       },
       {
-        "icon": "Water Mend",
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/e/ef/WMe_Icon.png/80px-WMe_Icon.png",
         "name": "Water Mend",
         "stats": {
           "Max HP": 5
