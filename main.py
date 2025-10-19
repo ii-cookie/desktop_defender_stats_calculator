@@ -1,8 +1,9 @@
 '''
 ---DISCLAIMER---
 ALL EQUATIONS IS PROVIDED BY aguy5235 IN DISCORD WITH https://www.desmos.com/calculator/qbqqylyvvi
-THIS SCRIPT IS PROVIDED BY iicookie IN DISCORD (me)
 ALL STATS IS COLLECTED FROM WIKI https://desktopdefender.miraheze.org/wiki/Main_Page
+THIS SCRIPT IS PROVIDED BY iicookie IN DISCORD (me)
+THE WEBSITE IS MAINLY BY CODED BY GROK
 '''
 
 
