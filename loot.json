@@ -74,6 +74,13 @@
           "Max HP": -10,
           "Knockback": 0.40
         }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/5/5f/MI_Icon.png/80px-MI_Icon.png",
+        "name": "Musical Inspiration",
+        "stats": {
+          "Fire Rate": 0.25
+        }
       }
     ],
     "B": [
@@ -172,6 +179,27 @@
         "stats": {
           "XP Obtained": 0.25
         }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/8/85/DrS_Icon.png/80px-DrS_Icon.png",
+        "name": "Druid's Sword",
+        "stats": {
+          "Projectile Damage": 0.30
+        }
+      },
+      {
+        "icon": "https://desktopdefender.miraheze.org/wiki/File:HuR_Icon.png",
+        "name": "Hunter Rune",
+        "stats": {
+          "Aim Cone": -20
+        }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/4/41/Tri_Icon.png/80px-Tri_Icon.png",
+        "name": "Trident",
+        "stats": {
+          "Shot Damage": 3
+        }
       }
     ],
     "E": [
@@ -231,6 +259,21 @@
         "name": "Water Mend",
         "stats": {
           "Max HP": 5
+        }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/b/b7/ExM_Icon.png/80px-ExM_Icon.png",
+        "name": "Expanded Mind",
+        "stats": {
+          "Projectile Size": 0.20
+        }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/b/bd/SiP_Icon.png/80px-SiP_Icon.png",
+        "name": "Simple Prayer",
+        "stats": {
+          "Money Obtained": 0.05,
+          "XP Obtained": 0.05
         }
       }
     ]
