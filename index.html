@@ -53,7 +53,7 @@
 
         <!-- Loot Section -->
         <section class="mb-8">
-            <h2 class="text-2xl font-semibold mb-4 text-white">Select Loot (3x3 Grid)</h2>
+            <h2 class="text-2xl font-semibold mb-4 text-white">Select Loot</h2>
             <div id="loot-grid" class="grid grid-cols-3 gap-2 w-64 mx-auto">
                 <!-- 9 slots will be dynamically generated -->
             </div>
@@ -400,9 +400,9 @@
             const total_dmg = total_damage_per_shot(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage, extra_projectile_level, loot_projectile);
             const dps = damage_per_second(total_dmg, fr.capped);
 
-            // Display results with 6 decimal places
+            // Display results
             document.getElementById('result-damage').textContent = dmg.toFixed(6);
-            document.getElementById('result-projectiles').textContent = proj.toFixed(6);
+            document.getElementById('result-projectiles').textContent = Math.floor(proj);
             document.getElementById('result-firerate').textContent = fr.display < 0.1 ? `${fr.display.toFixed(6)} (0.1 is the minimum)` : fr.display.toFixed(6);
             document.getElementById('result-total-damage').textContent = total_dmg.toFixed(6);
             document.getElementById('result-dps').textContent = dps.toFixed(6);
