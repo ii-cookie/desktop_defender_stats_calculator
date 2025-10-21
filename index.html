@@ -199,9 +199,10 @@
             return (7.73341e-7) * Math.pow(level, 3) - 0.000231949 * Math.pow(level, 2) + 0.0231915 * level - 0.0229862;
         }
 
-        function firerate(weapon_firerate, firerate_level, loot_firerate) {
+        function firerate(weapon_firerate, firerate_level, loot_firerate, weapon_name) {
             const calculatedFirerate = (1 / weapon_firerate) * (1 - (firerate_upgrade(firerate_level) + loot_firerate));
-            const cappedFirerate = Math.max(calculatedFirerate, 0.1);
+            const minFirerate = weapon_name?.toLowerCase() === 'flamethrower' ? 1 / 60 : 0.1;
+            const cappedFirerate = Math.max(calculatedFirerate, minFirerate);
             return { display: calculatedFirerate, capped: cappedFirerate };
         }
 
@@ -402,14 +403,14 @@
 
             const dmg = damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage);
             const proj = projectiles_per_shot(extra_projectile_level, loot_projectile);
-            const fr = firerate(weapon_firerate, firerate_level, loot_firerate);
+            const fr = firerate(weapon_firerate, firerate_level, loot_firerate, selectedWeapon.name);
             const total_dmg = total_damage_per_shot(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage, extra_projectile_level, loot_projectile);
             const dps = damage_per_second(total_dmg, fr.capped);
 
             // Display results
             document.getElementById('result-damage').textContent = dmg.toFixed(6);
             document.getElementById('result-projectiles').textContent = Math.floor(proj);
-            document.getElementById('result-firerate').textContent = fr.display < 0.1 ? `${fr.display.toFixed(6)} ( you have reached lower than the minimum firerate: 0.1, its not gonna shoot faster :< )` : fr.display.toFixed(6);
+            document.getElementById('result-firerate').textContent = fr.display < (selectedWeapon.name.toLowerCase() === 'flamethrower' ? 1/60 : 0.1) ? `${fr.display.toFixed(6)} ( you have reached lower than the minimum firerate: ${selectedWeapon.name.toLowerCase() === 'flamethrower' ? '1/60' : '0.1'}, its not gonna shoot faster :< )` : fr.display.toFixed(6);
             document.getElementById('result-total-damage').textContent = total_dmg.toFixed(6);
             document.getElementById('result-dps').textContent = dps.toFixed(6);
             document.getElementById('results').classList.remove('hidden');
