@@ -417,7 +417,7 @@
             document.getElementById('result-damage').textContent = dmg.toFixed(6);
             document.getElementById('result-projectiles').textContent = Math.floor(proj);
             document.getElementById('result-firerate').textContent = fr.display < (selectedWeapon.name.toLowerCase() === 'flamethrower' ? 1/60 : 0.1) ? `${fr.display.toFixed(6)} 
-            ( you have reached lower than the minimum firerate: ${selectedWeapon.name.toLowerCase() === 'flamethrower' ? '1/60 (frame-based, multiply total damage per shot with max(firerate,your fps) to recalculate dps)' : '0.1'}, its not gonna shoot faster :< )` : fr.display.toFixed(6);
+            ( you have reached lower than the minimum firerate: ${selectedWeapon.name.toLowerCase() === 'flamethrower' ? '1/60 [ frame-based, assumed 60fps ]  [multiply total damage per shot with max of (firerate or your fps) to recalculate dps]' : '0.1, its not gonna shoot faster :< '} )` : fr.display.toFixed(6);
             document.getElementById('result-total-damage').textContent = total_dmg.toFixed(6);
             document.getElementById('result-dps').textContent = dps.toFixed(6);
             document.getElementById('results').classList.remove('hidden');
