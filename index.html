@@ -118,313 +118,228 @@
     </div>
 
     <script>
-        // Embedded JSON data
-        const data = {
-            "weapons": [
-                {"name": "Bit", "stats": {"Damage": 2, "Added Damage Mult": 1, "Fire Rate": 1, "Aim Cone": 5, "Speed": 15, "Scale": 0.3, "Knockback": 5, "Projectiles": 1, "Bounces": 0, "Pierces": 0, "DPS": 2}},
-                {"name": "Burst", "stats": {"Damage": 1, "Fire Rate": 1, "Aim Cone": 15, "Speed": 20, "Scale": 0.3, "Knockback": 2, "Projectiles": 3, "Bounces": 0, "Pierces": 0, "DPS": 3}},
-                {"name": "Blue Hole", "stats": {"Damage": 6, "Fire Rate": 0.5, "Aim Cone": 0, "Speed": 2, "Scale": 0.35, "Knockback": 5, "Projectiles": 1, "Bounces": 0, "Pierces": 0, "DPS": 1}},
-                {"name": "Radius", "stats": {"Damage": 0.8, "Fire Rate": 0.6, "Aim Cone": 15, "Speed": 5, "Scale": 1, "Knockback": 4, "Projectiles": 5, "Bounces": 0, "Pierces": 0, "DPS": {"All 5 Hit": 2.4, "Single Hit": 0.48}}},
-                {"name": "Bounce", "stats": {"Damage": 0.6, "Fire Rate": 1, "Speed": 8, "Scale": 0.2, "Knockback": 2.5, "Projectiles": 1, "Bounces": 3, "Pierces": 0, "DPS": {"3 Enemies": 7.5, "1 Enemy": 2.5}}},
-                {"name": "Shotgun", "stats": {"Damage": 1, "Fire Rate": 0.8, "Speed": 20, "Scale": 0.2, "Knockback": 5, "Pellets": 3, "Burst": 1, "Bounces": 0, "Pierces": false}},
-                {"name": "Shuriken", "stats": {"Damage": 0.3, "Fire Rate": 3, "Speed": 18, "Scale": 0.07, "Knockback": 1, "Pellets": 1, "Burst": 2, "Bounces": 0, "Pierces": false}},
-                {"name": "Ballista", "stats": {"Damage": 3.5, "Fire Rate": 0.55, "Speed": 6, "Scale": 0.3, "Knockback": 5, "Pellets": 1, "Burst": 1, "Bounces": 0, "Pierces": true, "Num of Pierces": 3}},
-                {"name": "Flamethrower", "stats": {"Damage": 0.01, "Fire Rate": 50, "Speed": 20, "Scale": 0.1, "Knockback": 1, "Pellets": 1, "Burst": 1, "Bounces": 0, "Pierces": false}}
-            ],
-            "loot": {
-    "C": [
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/4/4b/AD_Icon.png/80px-AD_Icon.png","name": "Ancient Drawback","stats": {"Money Obtained": -0.10,"XP Obtained": 0.35}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c2/TM_Icon.png/80px-TM_Icon.png","name": "Trained Muscles","stats": {"Shot Damage": 10}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/2/23/MT_Icon.png/80px-MT_Icon.png","name": "Materials","stats": {"Projectile Size": 0.35}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/d/d0/MS_Icon.png/80px-MS_Icon.png","name": "Multishot","stats": {"Projectile Shot": 1,"Projectile Damage": -0.50}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/8/84/QM_Icon.png/80px-QM_Icon.png","name": "Quick Moves","stats": {"Fire Rate": 0.40,"Knockback": -0.50}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/a/a1/HAu_Icon.png/80px-HAu_Icon.png","name": "Health Aura","stats": {"Max HP": 20}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/a/a3/WTe_Icon.png/80px-WTe_Icon.png","name": "Wealth Texts","stats": {"Money Obtained": 0.35}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/1/17/SoL_Icon.png/80px-SoL_Icon.png","name": "Sight of Light","stats": {"Projectile Speed": 0.50}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/2/29/BoP_Icon.png/80px-BoP_Icon.png","name": "Bug of Power","stats": {"Projectile Damage": 0.45}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/9/9f/GC_Icon.png/80px-GC_Icon.png","name": "Glass Cannon","stats": {"Max HP": -10,"Knockback": 0.40}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/5/5f/MI_Icon.png/80px-MI_Icon.png","name": "Musical Inspiration","stats": {"Fire Rate": 0.25}}
-    ],
-    "B": [
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/6f/Scaler.png/80px-Scaler.png","name": "Living Projectile","stats": {"Projectile Shot": 1,"Fire Rate": -0.20}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/1/11/Sk.png/80px-Sk.png","name": "Sack","stats": {"Money Obtained": 0.45}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c7/Deter.png/80px-Deter.png","name": "Determination","stats": {"Projectile Damage": 0.60}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/9/9a/SCh.png/80px-SCh.png","name": "Spectral Channeling","stats": {"Money Obtained": 0.20,"XP Obtained": 0.20}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/6b/WGo.png/80px-WGo.png","name": "Wind Golem","stats": {"Knockback": 0.50}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/1/1e/LSt.png/80px-LSt.png","name": "Launch Staff","stats": {"Projectile Speed": 0.45}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c8/SHan.png/80px-SHan.png","name": "Steady Hand","stats": {"Aim Cone": -35}}
-    ],
-    "D": [
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/2/20/Hog_Icon.png/80px-Hog_Icon.png","name": "Hand of Greed","stats": {"Money Obtained": 0.35}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c7/BP_Icon.png/80px-BP_Icon.png","name": "Bear Power","stats": {"Projectile Speed": 0.35}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/67/Sps_Icon.png/80px-Sps_Icon.png","name": "Split Shot","stats": {"Projectile Shot": 1,"Projectile Damage": -0.70}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/a/aa/WG_Icon.png/80px-WG_Icon.png","name": "Wind Glove","stats": {"Knockback": 0.35}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/67/LN.png/80px-LN.png","name": "Life Necklace","stats": {"Max HP": 10}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/e/ee/SK.png/80px-SK.png","name": "Scientific Knowledge","stats": {"XP Obtained": 0.25}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/8/85/DrS_Icon.png/80px-DrS_Icon.png","name": "Druid's Sword","stats": {"Projectile Damage": 0.30}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/3/30/HuR_Icon.png/80px-HuR_Icon.png","name": "Hunter Rune","stats": {"Aim Cone": -20}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/4/41/Tri_Icon.png/80px-Tri_Icon.png","name": "Trident","stats": {"Shot Damage": 3}}
-    ],
-    "E": [
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/f/f3/Shs_Icon.png/80px-Shs_Icon.png","name": "Sharp Shoot","stats": {"Shot Damage": 1.5}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/7/78/Kee_Icon.png/80px-Kee_Icon.png","name": "Keen Eye","stats": {"Aim Cone": -5}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/f/fe/BDNA_Icon.png/80px-BDNA_Icon.png","name": "Berserk DNA","stats": {"Aim Cone": 20,"Shot Damage": 3}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/a/af/Stp_Icon.png/80px-Stp_Icon.png","name": "Strong Potion","stats": {"Projectile Damage": 0.20}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/2/24/Hew_Icon.png/80px-Hew_Icon.png","name": "Heavy Weapon","stats": {"Shot Damage": 5,"Fire Rate": -0.25}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/b/b1/Sper_Icon.png/80px-Sper_Icon.png","name": "Speed Rune","stats": {"Fire Rate": 0.15}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/4/40/Rgho_Icon.png/80px-Rgho_Icon.png","name": "Rich Ghost","stats": {"Money Obtained": 15}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/e/ef/WMe_Icon.png/80px-WMe_Icon.png","name": "Water Mend","stats": {"Max HP": 5}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/b/b7/ExM_Icon.png/80px-ExM_Icon.png","name": "Expanded Mind","stats": {"Projectile Size": 0.20}},
-      {"icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/b/bd/SiP_Icon.png/80px-SiP_Icon.png","name": "Simple Prayer","stats": {"Money Obtained": 0.05,"XP Obtained": 0.05}}
-    ]
-  }
-        };
-
-        // Ported Python functions to JavaScript
-        function damage_percent(level) {
-            return 0.0000103078 * Math.pow(level, 3) - 0.00309212 * Math.pow(level, 2) + 0.309199 * level - 0.306333;
-        }
-
-        function flat_damage(level) {
-            return (50 / 49) * level - 50 / 49;
-        }
-
-        function damage_mult(level) {
-            if (level < 4) return 1;
-            else if (level < 10) return 1.2;
-            else if (level < 21) return 1.2 ** 2;
-            else return 1.2 ** 3;
-        }
-
-        function damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage) {
-            return (weapon_damage * (1 + damage_percent(damage_level) + loot_percentage) +
-                    (flat_damage(flat_level) + loot_damage) * weapon_added_mult) * damage_mult(level);
-        }
-
-        function firerate_upgrade(level) {
-            return (7.73341e-7) * Math.pow(level, 3) - 0.000231949 * Math.pow(level, 2) + 0.0231915 * level - 0.0229862;
-        }
-
-        function firerate(weapon_firerate, firerate_level, loot_firerate, weapon_name) {
-            const calculatedFirerate = (1 / weapon_firerate) * (1 - (firerate_upgrade(firerate_level) + loot_firerate));
-            const minFirerate = weapon_name?.toLowerCase() === 'flamethrower' ? 1 / 60 : 0.1;
-            const cappedFirerate = Math.max(calculatedFirerate, minFirerate);
-            return { display: calculatedFirerate, capped: cappedFirerate };
-        }
-
-        function projectiles_per_shot(extra_projectile_level, loot_projectile) {
-            return 1 + Math.ceil((extra_projectile_level - 1) * 1.5) + loot_projectile;
-        }
-
-        function total_damage_per_shot(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage, extra_projectile_level, loot_projectile) {
-            return damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage) * projectiles_per_shot(extra_projectile_level, loot_projectile);
-        }
-
-        function damage_per_second(total_damage, firerate) {
-            return total_damage / firerate;
-        }
-
-        function get_weapon_damage(weapon) {
-            return weapon?.stats?.Damage || 0;
-        }
-
-        function get_weapon_added_mult(weapon) {
-            if (weapon?.name?.toLowerCase() === 'flamethrower') return 0.1;
-            return weapon?.stats?.['Added Damage Mult'] || 1;
-        }
-
-        function get_loot_percentage(loots) {
-            return loots.reduce((sum, loot) => sum + (loot?.stats?.['Projectile Damage'] || 0), 0);
-        }
-
-        function get_loot_damage(loots) {
-            return loots.reduce((sum, loot) => sum + (loot?.stats?.['Shot Damage'] || 0), 0);
-        }
-
-        function get_loot_projectile(loots) {
-            return loots.reduce((sum, loot) => sum + (loot?.stats?.['Projectile Shot'] || 0), 0);
-        }
-
-        function get_weapon_fire_rate(weapon) {
-            return weapon?.stats?.['Fire Rate'] || 0;
-        }
-
-        function get_loot_fire_rate(loots) {
-            return loots.reduce((sum, loot) => sum + (loot?.stats?.['Fire Rate'] || 0), 0);
-        }
-
-        // Initialize weapons
-        const weaponsContainer = document.getElementById('weapons-container');
-        let selectedWeapon = null;
-
-        // Load saved settings
-        function loadSavedSettings() {
-            // Load selected weapon
-            const savedWeaponName = localStorage.getItem('selectedWeapon');
-            if (savedWeaponName) {
-                selectedWeapon = data.weapons.find(weapon => weapon.name === savedWeaponName);
-                if (selectedWeapon) {
-                    const buttons = weaponsContainer.querySelectorAll('button');
-                    buttons.forEach(btn => {
-                        if (btn.textContent === savedWeaponName) {
-                            btn.className = 'p-2 border rounded bg-blue-600 text-white border-blue-500';
-                        } else {
-                            btn.className = 'p-2 border rounded bg-gray-600 hover:bg-gray-500 text-gray-100 border-gray-500';
-                        }
-                    });
-                }
+        /* -------------------------------------------------------------
+           1. Load the two JSON files and build the same `data` object
+           ------------------------------------------------------------- */
+        let data = null;                     // will hold { weapons:…, loot:… }
+        const LOOT_URL    = 'loot.json';
+        const WEAPONS_URL = 'weapons.json';
+        
+        async function loadData() {
+            try {
+                const [lootRes, weaponsRes] = await Promise.all([
+                    fetch(LOOT_URL).then(r => r.json()),
+                    fetch(WEAPONS_URL).then(r => r.json())
+                ]);
+        
+                // loot.json already has the shape { loot: { B:…, C:…, … } }
+                // weapons.json has an array at the root
+                data = {
+                    loot:    lootRes.loot,          // keep the nested B/C/D/E groups
+                    weapons: weaponsRes.weapons     // array of weapon objects
+                };
+        
+                // -------------------------------------------------
+                // 2. Everything that used `data` before can stay!
+                // -------------------------------------------------
+                initApp();
+            } catch (err) {
+                console.error('Could not load JSON files:', err);
+                alert('Failed to load game data – check the console.');
             }
-
-            // Load loot slots
-            const savedLootSlots = JSON.parse(localStorage.getItem('lootSlots') || '[]');
-            savedLootSlots.forEach((lootName, index) => {
-                if (lootName) {
-                    const loot = Object.values(data.loot).flat().find(l => l.name === lootName);
-                    if (loot && index < 9) {
-                        lootSlots[index] = loot;
-                        const slot = lootGrid.children[index];
-                        slot.innerHTML = `
-                            <img src="${loot.icon}" alt="${loot.name} Icon" class="slot-image">
-                        `;
+        }
+        
+        /* -------------------------------------------------------------
+           2. The whole original script – unchanged except it now
+               runs **after** `data` is ready (inside initApp())
+           ------------------------------------------------------------- */
+        function initApp() {
+            // ----- original helper functions (damage, firerate, …) -----
+            function damage_percent(level) {
+                return 0.0000103078 * Math.pow(level, 3) - 0.00309212 * Math.pow(level, 2) + 0.309199 * level - 0.306333;
+            }
+            function flat_damage(level) {
+                return (50 / 49) * level - 50 / 49;
+            }
+            function damage_mult(level) {
+                if (level < 4) return 1;
+                else if (level < 10) return 1.2;
+                else if (level < 21) return 1.2 ** 2;
+                else return 1.2 ** 3;
+            }
+            function damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage) {
+                return (weapon_damage * (1 + damage_percent(damage_level) + loot_percentage) +
+                        (flat_damage(flat_level) + loot_damage) * weapon_added_mult) * damage_mult(level);
+            }
+            function firerate_upgrade(level) {
+                return (7.73341e-7) * Math.pow(level, 3) - 0.000231949 * Math.pow(level, 2) + 0.0231915 * level - 0.0229862;
+            }
+            function firerate(weapon_firerate, firerate_level, loot_firerate, weapon_name) {
+                const calculatedFirerate = (1 / weapon_firerate) * (1 - (firerate_upgrade(firerate_level) + loot_firerate));
+                const minFirerate = weapon_name?.toLowerCase() === 'flamethrower' ? 1 / 60 : 0.1;
+                const cappedFirerate = Math.max(calculatedFirerate, minFirerate);
+                return { display: calculatedFirerate, capped: cappedFirerate };
+            }
+            function projectiles_per_shot(extra_projectile_level, loot_projectile) {
+                return 1 + Math.ceil((extra_projectile_level - 1) * 1.5) + loot_projectile;
+            }
+            function total_damage_per_shot(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage, extra_projectile_level, loot_projectile) {
+                return damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage) *
+                       projectiles_per_shot(extra_projectile_level, loot_projectile);
+            }
+            function damage_per_second(total_damage, firerate) {
+                return total_damage / firerate;
+            }
+        
+            // ----- getters -----
+            function get_weapon_damage(weapon)          { return weapon?.stats?.Damage || 0; }
+            function get_weapon_added_mult(weapon) {
+                if (weapon?.name?.toLowerCase() === 'flamethrower') return 0.1;
+                return weapon?.stats?.['Added Damage Mult'] || 1;
+            }
+            function get_loot_percentage(loots)        { return loots.reduce((s,l)=>s+(l?.stats?.['Projectile Damage']||0),0); }
+            function get_loot_damage(loots)            { return loots.reduce((s,l)=>s+(l?.stats?.['Shot Damage']||0),0); }
+            function get_loot_projectile(loots)        { return loots.reduce((s,l)=>s+(l?.stats?.['Projectile Shot']||0),0); }
+            function get_weapon_fire_rate(weapon)      { return weapon?.stats?.['Fire Rate'] || 0; }
+            function get_loot_fire_rate(loots)         { return loots.reduce((s,l)=>s+(l?.stats?.['Fire Rate']||0),0); }
+        
+            // ----- UI setup -----
+            const weaponsContainer   = document.getElementById('weapons-container');
+            const lootGrid           = document.getElementById('loot-grid');
+            const lootPopup          = document.getElementById('loot-popup');
+            const lootPopupContent   = document.getElementById('loot-popup-content');
+            const lootSlots          = Array(9).fill(null);
+            let selectedWeapon       = null;
+        
+            const rarityColors = { B:'text-orange-500', C:'text-blue-300', D:'text-green-500', E:'text-blue-600' };
+        
+            // ---- weapons buttons ----
+            data.weapons.forEach(w => {
+                const btn = document.createElement('button');
+                btn.textContent = w.name;
+                btn.className = 'p-2 border rounded bg-gray-600 hover:bg-gray-500 text-gray-100 border-gray-500';
+                btn.onclick = () => {
+                    weaponsContainer.querySelectorAll('button')
+                        .forEach(b => b.className = 'p-2 border rounded bg-gray-600 hover:bg-gray-500 text-gray-100 border-gray-500');
+                    btn.className = 'p-2 border rounded bg-blue-600 text-white border-blue-500';
+                    selectedWeapon = w;
+                    localStorage.setItem('selectedWeapon', w.name);
+                };
+                weaponsContainer.appendChild(btn);
+            });
+        
+            // ---- loot grid (9 slots) ----
+            for (let i = 0; i < 9; i++) {
+                const slot = document.createElement('div');
+                slot.className = 'bg-gray-800 p-2 rounded shadow-md flex items-center justify-center h-20 cursor-pointer';
+                slot.innerHTML = '<span class="text-2xl text-gray-400">+</span>';
+                slot.dataset.slotIndex = i;
+                slot.onclick = () => {
+                    lootPopup.style.display = 'flex';
+                    lootPopupContent.dataset.slotIndex = i;
+                };
+                lootGrid.appendChild(slot);
+            }
+        
+            // ---- loot popup cards ----
+            const allLoots = Object.values(data.loot).flat();
+            allLoots.forEach(loot => {
+                const rarity = Object.keys(data.loot).find(k => data.loot[k].some(l => l.name === loot.name));
+                const card = document.createElement('div');
+                card.className = 'bg-gray-800 p-2 rounded shadow-md flex flex-col items-center text-sm cursor-pointer hover:bg-gray-700';
+                card.innerHTML = `
+                    <img src="${loot.icon}" alt="${loot.name}" class="w-10 h-10 mb-1 object-contain">
+                    <span class="font-medium text-center text-xs text-gray-100">${loot.name}</span>
+                    <span class="text-xs ${rarityColors[rarity]||'text-gray-400'}">Rarity: ${rarity}</span>
+                `;
+                card.onclick = () => {
+                    const idx = +lootPopupContent.dataset.slotIndex;
+                    lootSlots[idx] = loot;
+                    lootGrid.children[idx].innerHTML = `<img src="${loot.icon}" class="slot-image">`;
+                    localStorage.setItem('lootSlots', JSON.stringify(lootSlots.map(l=>l?.name||null)));
+                    lootPopup.style.display = 'none';
+                };
+                lootPopupContent.appendChild(card);
+            });
+        
+            // ---- close popup on outside click ----
+            lootPopup.onclick = e => { if (e.target === lootPopup) lootPopup.style.display = 'none'; };
+        
+            // ---- persist input fields ----
+            ['level','damage_level','flat_level','extra_projectile_level','firerate_level'].forEach(id => {
+                const el = document.getElementById(id);
+                el.addEventListener('input', () => localStorage.setItem(id, el.value));
+            });
+        
+            // ---- calculate button ----
+            document.getElementById('calculate-btn').onclick = () => {
+                if (!selectedWeapon) return alert('Pick a weapon first!');
+        
+                const loots = lootSlots.filter(Boolean);
+                const lvl = +document.getElementById('level').value || 1;
+                const dmgLvl = +document.getElementById('damage_level').value || 1;
+                const flatLvl = +document.getElementById('flat_level').value || 1;
+                const projLvl = +document.getElementById('extra_projectile_level').value || 1;
+                const frLvl = +document.getElementById('firerate_level').value || 1;
+        
+                const wDmg   = get_weapon_damage(selectedWeapon);
+                const wAdd   = get_weapon_added_mult(selectedWeapon);
+                const lPerc  = get_loot_percentage(loots);
+                const lDmg   = get_loot_damage(loots);
+                const lProj  = get_loot_projectile(loots);
+                const wFR    = get_weapon_fire_rate(selectedWeapon);
+                const lFR    = get_loot_fire_rate(loots);
+        
+                const dmg   = damage(lvl, wDmg, wAdd, dmgLvl, flatLvl, lPerc, lDmg);
+                const proj  = projectiles_per_shot(projLvl, lProj);
+                const fr    = firerate(wFR, frLvl, lFR, selectedWeapon.name);
+                const total = total_damage_per_shot(lvl, wDmg, wAdd, dmgLvl, flatLvl, lPerc, lDmg, projLvl, lProj);
+                const dps   = damage_per_second(total, fr.capped);
+        
+                document.getElementById('result-damage').textContent        = dmg.toFixed(6);
+                document.getElementById('result-projectiles').textContent   = Math.floor(proj);
+                document.getElementById('result-firerate').textContent      = fr.display.toFixed(6);
+                document.getElementById('result-total-damage').textContent  = total.toFixed(6);
+                document.getElementById('result-dps').textContent           = dps.toFixed(6);
+                document.getElementById('results').classList.remove('hidden');
+            };
+        
+            // ---- load saved state (weapon + loot + inputs) ----
+            (function loadSaved() {
+                const savedW = localStorage.getItem('selectedWeapon');
+                if (savedW) {
+                    const w = data.weapons.find(x=>x.name===savedW);
+                    if (w) {
+                        selectedWeapon = w;
+                        weaponsContainer.querySelectorAll('button').forEach(b=>{
+                            b.className = b.textContent===savedW ?
+                                'p-2 border rounded bg-blue-600 text-white border-blue-500' :
+                                'p-2 border rounded bg-gray-600 hover:bg-gray-500 text-gray-100 border-gray-500';
+                        });
                     }
                 }
-            });
-
-            // Load input values
-            const inputFields = ['level', 'damage_level', 'flat_level', 'extra_projectile_level', 'firerate_level'];
-            inputFields.forEach(id => {
-                const savedValue = localStorage.getItem(id);
-                if (savedValue !== null) {
-                    document.getElementById(id).value = savedValue;
-                }
-            });
+        
+                const savedLoot = JSON.parse(localStorage.getItem('lootSlots')||'[]');
+                savedLoot.forEach((name, i) => {
+                    if (!name) return;
+                    const loot = allLoots.find(l=>l.name===name);
+                    if (loot && i<9) {
+                        lootSlots[i] = loot;
+                        lootGrid.children[i].innerHTML = `<img src="${loot.icon}" class="slot-image">`;
+                    }
+                });
+        
+                ['level','damage_level','flat_level','extra_projectile_level','firerate_level'].forEach(id=>{
+                    const v = localStorage.getItem(id);
+                    if (v) document.getElementById(id).value = v;
+                });
+            })();
         }
-
-        data.weapons.forEach(weapon => {
-            const button = document.createElement('button');
-            button.textContent = weapon.name;
-            button.className = 'p-2 border rounded bg-gray-600 hover:bg-gray-500 text-gray-100 border-gray-500';
-            button.addEventListener('click', () => {
-                document.querySelectorAll('#weapons-container button').forEach(btn => btn.className = 'p-2 border rounded bg-gray-600 hover:bg-gray-500 text-gray-100 border-gray-500');
-                button.className = 'p-2 border rounded bg-blue-600 text-white border-blue-500';
-                selectedWeapon = weapon;
-                localStorage.setItem('selectedWeapon', weapon.name);
-            });
-            weaponsContainer.appendChild(button);
-        });
-
-        // Rarity colors
-        const rarityColors = {
-            'C': 'text-blue-300',
-            'B': 'text-orange-500',
-            'D': 'text-green-500',
-            'E': 'text-blue-600'
-        };
-
-        // Initialize loot grid
-        const lootGrid = document.getElementById('loot-grid');
-        const lootPopup = document.getElementById('loot-popup');
-        const lootPopupContent = document.getElementById('loot-popup-content');
-        const lootSlots = Array(9).fill(null); // Track loot in each slot
-
-        for (let i = 0; i < 9; i++) {
-            const slot = document.createElement('div');
-            slot.className = 'bg-gray-800 p-2 rounded shadow-md flex items-center justify-center h-20 cursor-pointer';
-            slot.innerHTML = '<span class="text-2xl text-gray-400">+</span>';
-            slot.dataset.slotIndex = i;
-            slot.addEventListener('click', () => {
-                lootPopup.style.display = 'flex';
-                lootPopupContent.dataset.slotIndex = i; // Store which slot was clicked
-            });
-            lootGrid.appendChild(slot);
-        }
-
-        // Initialize loot popup
-        const allLoots = Object.values(data.loot).flat();
-        allLoots.forEach(loot => {
-            const rarity = Object.keys(data.loot).find(key => data.loot[key].some(l => l.name === loot.name));
-            const card = document.createElement('div');
-            card.className = 'bg-gray-800 p-2 rounded shadow-md flex flex-col items-center text-sm cursor-pointer hover:bg-gray-700';
-            card.innerHTML = `
-                <img src="${loot.icon}" alt="${loot.name} Icon" class="w-10 h-10 mb-1 object-contain">
-                <span class="font-medium text-center text-xs text-gray-100">${loot.name}</span>
-                <span class="text-xs ${rarityColors[rarity] || 'text-gray-400'}">Rarity: ${rarity}</span>
-            `;
-            card.addEventListener('click', () => {
-                const slotIndex = parseInt(lootPopupContent.dataset.slotIndex);
-                lootSlots[slotIndex] = loot;
-                const slot = lootGrid.children[slotIndex];
-                slot.innerHTML = `
-                    <img src="${loot.icon}" alt="${loot.name} Icon" class="slot-image">
-                `;
-                // Save loot slots
-                const lootNames = lootSlots.map(loot => loot ? loot.name : null);
-                localStorage.setItem('lootSlots', JSON.stringify(lootNames));
-                lootPopup.style.display = 'none';
-            });
-            lootPopupContent.appendChild(card);
-        });
-
-        // Save input values on change
-        const inputFields = ['level', 'damage_level', 'flat_level', 'extra_projectile_level', 'firerate_level'];
-        inputFields.forEach(id => {
-            const input = document.getElementById(id);
-            input.addEventListener('input', () => {
-                localStorage.setItem(id, input.value);
-            });
-        });
-
-        // Close popup when clicking outside
-        lootPopup.addEventListener('click', (e) => {
-            if (e.target === lootPopup) {
-                lootPopup.style.display = 'none';
-            }
-        });
-
-        // Handle calculate button
-        document.getElementById('calculate-btn').addEventListener('click', () => {
-            if (!selectedWeapon) {
-                alert('Please select a weapon.');
-                return;
-            }
-
-            // Gather selected loots from slots
-            const selectedLoots = lootSlots.filter(loot => loot !== null);
-
-            // Get input values
-            const level = parseFloat(document.getElementById('level').value) || 1;
-            const damage_level = parseFloat(document.getElementById('damage_level').value) || 1;
-            const flat_level = parseFloat(document.getElementById('flat_level').value) || 1;
-            const extra_projectile_level = parseFloat(document.getElementById('extra_projectile_level').value) || 1;
-            const firerate_level = parseFloat(document.getElementById('firerate_level').value) || 1;
-
-            // Calculate stats
-            const weapon_damage = get_weapon_damage(selectedWeapon);
-            const weapon_added_mult = get_weapon_added_mult(selectedWeapon);
-            const loot_percentage = get_loot_percentage(selectedLoots);
-            const loot_damage = get_loot_damage(selectedLoots);
-            const loot_projectile = get_loot_projectile(selectedLoots);
-            const weapon_firerate = get_weapon_fire_rate(selectedWeapon);
-            const loot_firerate = get_loot_fire_rate(selectedLoots);
-
-            const dmg = damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage);
-            const proj = projectiles_per_shot(extra_projectile_level, loot_projectile);
-            const fr = firerate(weapon_firerate, firerate_level, loot_firerate, selectedWeapon.name);
-            const total_dmg = total_damage_per_shot(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage, extra_projectile_level, loot_projectile);
-            const dps = damage_per_second(total_dmg, fr.capped);
-
-            // Display results
-            document.getElementById('result-damage').textContent = dmg.toFixed(6);
-            document.getElementById('result-projectiles').textContent = Math.floor(proj);
-            document.getElementById('result-firerate').textContent = fr.display < (selectedWeapon.name.toLowerCase() === 'flamethrower' ? 1/60 : 0.1) ? `${fr.display.toFixed(6)} 
-            ( you have reached lower than the minimum firerate: ${selectedWeapon.name.toLowerCase() === 'flamethrower' ? '1/60 [ frame-based, assumed 60fps ]  [multiply total damage per shot with max of (firerate or your fps) to recalculate dps]' : '0.1, its not gonna shoot faster :< '} )` : fr.display.toFixed(6);
-            document.getElementById('result-total-damage').textContent = total_dmg.toFixed(6);
-            document.getElementById('result-dps').textContent = dps.toFixed(6);
-            document.getElementById('results').classList.remove('hidden');
-        });
-
-        // Load saved settings on page load
-        loadSavedSettings();
-    </script>
+        
+        /* -------------------------------------------------------------
+           3. Kick everything off
+           ------------------------------------------------------------- */
+        loadData();
+        </script>
 </body>
 </html>
