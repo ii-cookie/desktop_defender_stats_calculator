@@ -43,7 +43,7 @@
 </head>
 <body class="font-sans text-gray-100">
     <div class="container mx-auto p-4 max-w-4xl">
-        <h1 class="text-3xl font-bold text-center mb-6 text-white">Desktop Defender: Stats Calculator</h1>
+        <h1 class="text-3xl font-bold text-center mb-6 text-white">Desktop Defender: Stats Calculator (WIP)</h1>
 
         <!-- Weapons Section -->
         <section class="mb-8">
@@ -158,8 +158,8 @@
         }
 
         function damage(level, weapon_damage, weapon_added_mult, damage_level, flat_level, loot_percentage, loot_damage) {
-            return (weapon_damage * (1 + damage_percent(damage_level) + loot_percentage) +
-                    (flat_damage(flat_level) + loot_damage) * weapon_added_mult) * damage_mult(level);
+            return (weapon_damage +
+                    (flat_damage(flat_level) + loot_damage) * weapon_added_mult) * damage_mult(level) * (1 + damage_percent(damage_level) + loot_percentage);
         }
 
         function firerate_upgrade(level) {
