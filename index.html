@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desktop Defender: Stats Calculator</title>
+    <title>Desktop Defender: Stats Calculator (WIP)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -54,14 +54,14 @@
         <!-- Loot Section -->
         <section class="mb-8">
             <h2 class="text-2xl font-semibold mb-4 text-white">Select Loot</h2>
-            <div id="loot-grid" class="grid grid-cols-3 gap-2 w-64 mx-auto">
-                <!-- 9 slots will be dynamically generated -->
+            <div id="loot-grid" class="grid grid-cols-6 gap-2 w-full max-w-md mx-auto">
+                <!-- 18 slots will be dynamically generated -->
             </div>
         </section>
 
         <!-- Loot Popup -->
         <div id="loot-popup">
-            <div id="loot-popup-content" class="bg-gray-800 p-4 rounded-lg shadow-lg mx-auto mt-20 max-w-lg w-full grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div id="loot-popup-content" class="bg-gray-800 p-4 rounded-lg shadow-lg mx-auto mt-20 max-w-4xl w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
                 <!-- Loot cards will be dynamically generated -->
             </div>
         </div>
@@ -241,7 +241,7 @@
             savedLootSlots.forEach((lootName, index) => {
                 if (lootName) {
                     const loot = Object.values(data.loot).flat().find(l => l.name === lootName);
-                    if (loot && index < 9) {
+                    if (loot && index < 18) {
                         lootSlots[index] = loot;
                         const slot = lootGrid.children[index];
                         slot.innerHTML = `
@@ -265,7 +265,7 @@
         const lootGrid = document.getElementById('loot-grid');
         const lootPopup = document.getElementById('loot-popup');
         const lootPopupContent = document.getElementById('loot-popup-content');
-        const lootSlots = Array(9).fill(null); // Track loot in each slot
+        const lootSlots = Array(18).fill(null); // Track loot in each slot
 
         // Save input values on change
         const inputFields = ['level', 'damage_level', 'flat_level', 'extra_projectile_level', 'firerate_level'];
@@ -347,7 +347,7 @@
                 'E': 'text-blue-600'
             };
 
-            for (let i = 0; i < 9; i++) {
+            for (let i = 0; i < 18; i++) {
                 const slot = document.createElement('div');
                 slot.className = 'bg-gray-800 p-2 rounded shadow-md flex items-center justify-center h-20 cursor-pointer';
                 slot.innerHTML = '<span class="text-2xl text-gray-400">+</span>';
