@@ -185,7 +185,7 @@
             slot.innerHTML = `<div class="inner"><span class="plus">+</span></div>`;
         }
 
-        slot.onclick = () => { if (!lootSlots[idx]) openPopup(idx); };
+        slot.onclick = () => openPopup(idx);
         return slot;
     }
 
