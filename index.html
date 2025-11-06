@@ -11,7 +11,6 @@
         #loot-popup-content { max-height:80vh; overflow-y:auto; }
         #loot-popup-content::-webkit-scrollbar { display:none; }
         #loot-popup-content { -ms-overflow-style:none; scrollbar-width:none; }
-
         /* ---- LOOT SLOT ---- */
         .loot-slot {
             position: relative;
@@ -143,9 +142,33 @@
     /* ---------- CALCULATION FUNCTIONS ---------- */
     function damage_percent(level) { const x = Math.max(0, Math.min(200, level));
         return 20 * (1 - Math.pow((200 - x) / 200, 3)); }
-    function flat_damage(level)   { return (50/49)*level - 50/49; }
+    function flat_damage(level, player_level)   { 
+        const levelUpgrades = [
+            [70, 1],
+            [73, 1],
+            [81, 1],
+            [92, 1],
+            [101, 1],
+            [109, 1],
+            [118, 1],
+            [127, 1],
+            [134, 1],
+            [137, 1],
+            [143, 1]
+        ]
+        if (player_level < 70) return (50/49)*level - 50/49; 
+        let flat = level;
+        for (let [threshold, f] of levelUpgrades) {
+            if (level >= threshold) {
+                flat += f;
+            } else {
+                break;
+            }
+        }
+        return (50/49)*flat - 50/49; 
+    }
     function damage_mult(level)   { 
-        const damageMultipliers = [
+        const levelUpgrades = [
             [4, 1.2],
             [10, 1.2],
             [21, 1.2],
@@ -167,7 +190,7 @@
         ];
         if (level < 4) return 1;
         let mult = 1;
-        for (let [threshold, m] of damageMultipliers) {
+        for (let [threshold, m] of levelUpgrades) {
             if (level >= threshold) {
                 mult *= m;
             } else {
