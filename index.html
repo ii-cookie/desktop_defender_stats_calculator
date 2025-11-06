@@ -123,6 +123,14 @@
             <p class="text-gray-100"><strong>Firerate:</strong> <span id="result-firerate">0</span></p>
             <p class="text-gray-100"><strong>Total Damage per Shot:</strong> <span id="result-total-damage">0</span></p>
             <p class="text-gray-100"><strong>Damage per Second:</strong> <span id="result-dps">0</span></p>
+    
+            <!-- NEW: Collapsible Details -->
+            <details class="mt-4 text-sm text-gray-400 cursor-pointer">
+                <summary class="inline-flex items-center gap-1 hover:text-gray-200">
+                    details <span class="inline-block text-xs">▼</span>
+                </summary>
+                <div id="calc-details" class="mt-2 pl-4 space-y-1 text-gray-300"></div>
+            </details>
         </div>
     </section>
 
@@ -382,6 +390,19 @@
         const fr = firerate(weapon_firerate,firerate_level,loot_firerate,selectedWeapon.name);
         const tot = total_damage_per_shot(level,weapon_damage,weapon_added_mult,damage_level,flat_level,loot_percentage,loot_damage,extra_projectile_level,loot_projectile);
         const dps = damage_per_second(tot,fr.capped);
+
+
+        const details = document.getElementById('calc-details');
+        details.innerHTML = `
+            damage upgrade = ${damage_percent(damage_level).toFixed(4)}<br>
+            flat damage = ${flat_damage(flat_level).toFixed(4)}<br>
+            damage mult = ${damage_mult(level).toFixed(4)}<br>
+            fire rate upgrade = ${firerate_upgrade(firerate_level).toFixed(4)}<br>
+            loot projectile damage = ${loot_percentage.toFixed(4)}<br>
+            loot shot damage = ${loot_damage.toFixed(4)}<br>
+            loot projectile = ${loot_projectile}<br>
+            loot fire rate = ${loot_firerate.toFixed(4)}
+        `;
 
         document.getElementById('result-damage').textContent = dmg.toFixed(6);
         document.getElementById('result-projectiles').textContent = Math.floor(proj);
