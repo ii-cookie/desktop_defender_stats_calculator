@@ -163,7 +163,8 @@
         }
 
         function firerate_upgrade(level) {
-            return (7.73341e-7) * Math.pow(level, 3) - 0.000231949 * Math.pow(level, 2) + 0.0231915 * level - 0.0229862;
+            const x = Math.max(0, Math.min(400, level));
+            return 0.75 * (1 - Math.pow((400 - x) / 400, 3));
         }
 
         function firerate(weapon_firerate, firerate_level, loot_firerate, weapon_name) {
