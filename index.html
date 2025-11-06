@@ -131,7 +131,7 @@
     /* ---------- DATA LOADING ---------- */
     async function loadData() {
         try {
-            const [weaponsResponse, lootResponse] = await Promise.all([fetch('weapons.json'), fetch('loot.json')]);
+            const [weaponsResponse, lootResponse] = await Promise.all([fetch('weapons.json'), fetch('loot_update.json')]);
             const weapons = await weaponsResponse.json();
             const loot = await lootResponse.json();
             data = { weapons: weapons.weapons, loot: loot.loot };
