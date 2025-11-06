@@ -79,9 +79,21 @@
     </section>
 
     <!-- Loot Popup -->
-    <div id="loot-popup">
-        <div id="loot-popup-content"
-             class="bg-gray-800 p-4 rounded-lg shadow-lg mx-auto mt-20 max-w-4xl w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2">
+    <div id="loot-popup" class="fixed inset-0 bg-black/70 flex items-start justify-center z-50 overflow-y-auto">
+        <div class="bg-gray-800 rounded-lg shadow-2xl max-w-5xl w-full mx-4 my-8 flex flex-col max-h-screen">
+            
+            <!-- Fixed Search Bar (always on top) -->
+            <div class="p-4 border-b border-gray-700 sticky top-0 bg-gray-800 z-10">
+                <input type="text" id="loot-search" placeholder="Search loot..."
+                       class="w-full p-3 rounded-lg bg-gray-700 text-gray-100 border border-gray-600 
+                              focus:outline-none focus:ring-2 focus:ring-blue-500 text-base">
+            </div>
+    
+            <!-- Scrollable Loot Grid -->
+            <div id="loot-popup-content" 
+                 class="p-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 overflow-y-auto flex-1">
+                <!-- loot cards will go here -->
+            </div>
         </div>
     </div>
 
@@ -289,12 +301,16 @@
         /* 18 loot slots */
         for (let i=0;i<18;i++) lootGrid.appendChild(renderSlot(i));
 
+        /* search input */
+        const searchInput = document.getElementById('loot-search');
+
         /* loot cards */
         const rarityColor = {C:'text-blue-300',B:'text-orange-500',D:'text-green-500',E:'text-blue-600'};
         Object.values(data.loot).flat().forEach(loot => {
             const rarity = Object.keys(data.loot).find(key=>data.loot[key].some(item=>item.name===loot.name));
             const card = document.createElement('div');
-            card.className='bg-gray-800 p-2 rounded shadow-md flex flex-col items-center text-sm cursor-pointer hover:bg-gray-700';
+            card.className='loot-card bg-gray-800 p-2 rounded shadow-md flex flex-col items-center text-sm cursor-pointer hover:bg-gray-700';
+            card.dataset.name = loot.name.toLowerCase();
             card.innerHTML = `
                 <img src="${loot.icon}" class="w-10 h-10 mb-1 object-contain">
                 <span class="text-xs text-gray-100">${loot.name}</span>
@@ -306,6 +322,19 @@
             };
             lootPopupContent.appendChild(card);
         });
+
+        /* search functionality */
+        searchInput.oninput = () => {
+            const query = searchInput.value.toLowerCase();
+            lootPopupContent.querySelectorAll('.loot-card').forEach(card => {
+                if (!query) {
+                    card.style.display = 'flex';
+                } else {
+                    const regex = new RegExp(query.split('').join('.*'));
+                    card.style.display = regex.test(card.dataset.name) ? 'flex' : 'none';
+                }
+            });
+        };
 
         /* load saved data */
         const savedWeapon = localStorage.getItem('selectedWeapon');
