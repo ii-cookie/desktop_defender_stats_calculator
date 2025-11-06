@@ -160,8 +160,18 @@
     }
 
     /* ---------- CALCULATION FUNCTIONS ---------- */
-    function damage_percent(level) { const x = Math.max(0, Math.min(200, level));
-        return 20 * (1 - Math.pow((200 - x) / 200, 3)); }
+    function damage_percent(level) { 
+        const x = Math.max(0, Math.min(200, level));
+        result = 20 * (1 - Math.pow((200 - x) / 200, 3));
+        if (level < 200) {
+            return result; 
+        }
+        excess = level - 200;
+        for (let i = 0; i < excess; i++){
+            result += 0.1;
+        }
+        return result;
+    }
     function flat_damage(level, player_level)   { 
         const levelUpgrades = [
             [70, 1],
