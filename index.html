@@ -359,7 +359,11 @@
 
         /* load saved data */
         const savedWeapon = localStorage.getItem('selectedWeapon');
-        if (savedWeapon) document.querySelector(`#weapons-container button`)?.click();
+        if (savedWeapon) {
+            const btn = Array.from(document.querySelectorAll('#weapons-container button'))
+                .find(b => b.textContent === savedWeapon);
+            btn?.click();
+        }
 
         JSON.parse(localStorage.getItem('lootSlots')||'[]').forEach((name,i) => {
             if (name && i<18) {
