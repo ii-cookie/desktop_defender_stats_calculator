@@ -144,7 +144,38 @@
     function damage_percent(level) { const x = Math.max(0, Math.min(400, level));
         return 0.75 * (1 - Math.pow((400 - x) / 400, 3)); }
     function flat_damage(level)   { return (50/49)*level - 50/49; }
-    function damage_mult(level)   { return level<4?1:level<10?1.2:level<21?1.44:1.728; }
+    function damage_mult(level)   { 
+        const damageMultipliers = [
+            [4, 1.2],
+            [10, 1.2],
+            [21, 1.2],
+            [32, 1.1],
+            [40, 1.15],
+            [45, 1.2],
+            [49, 1.1],
+            [54, 1.1],
+            [63, 1.25],
+            [66, 1.2],
+            [77, 1.5],
+            [85, 1.2],
+            [91, 1.2],
+            [98, 1.3],
+            [105, 1.2],
+            [113, 1.2],
+            [123, 1.4],
+            [129, 1.2]
+        ];
+        if (level < 4) return 1;
+        let mult = 1;
+        for (let [threshold, m] of damageMultipliers) {
+            if (level >= threshold) {
+                mult *= m;
+            } else {
+                break;
+            }
+        }
+        return mult;    
+    }
     function damage(level,weapon_damage,weapon_added_mult,damage_level,flat_level,loot_percentage,loot_damage) {
         return (weapon_damage + (flat_damage(flat_level)+loot_damage)*weapon_added_mult) * damage_mult(level) * (1 + damage_percent(damage_level) + loot_percentage);
     }
