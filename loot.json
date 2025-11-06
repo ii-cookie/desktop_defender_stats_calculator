@@ -1,5 +1,58 @@
 {
   "loot": {
+    "B": [
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/6f/Scaler.png/80px-Scaler.png",
+        "name": "Living Projectile",
+        "stats": {
+          "Projectile Shot": 1,
+          "Fire Rate": -0.20
+        }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/1/11/Sk.png/80px-Sk.png",
+        "name": "Sack",
+        "stats": {
+          "Money Obtained": 0.45
+        }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c7/Deter.png/80px-Deter.png",
+        "name": "Determination",
+        "stats": {
+          "Projectile Damage": 0.60
+        }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/9/9a/SCh.png/80px-SCh.png",
+        "name": "Spectral Channeling",
+        "stats": {
+          "Money Obtained": 0.20,
+          "XP Obtained": 0.20
+        }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/6b/WGo.png/80px-WGo.png",
+        "name": "Wind Golem",
+        "stats": {
+          "Knockback": 0.50
+        }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/1/1e/LSt.png/80px-LSt.png",
+        "name": "Launch Staff",
+        "stats": {
+          "Projectile Speed": 0.45
+        }
+      },
+      {
+        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c8/SHan.png/80px-SHan.png",
+        "name": "Steady Hand",
+        "stats": {
+          "Aim Cone": -35
+        }
+      }
+    ],
     "C": [
       {
         "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/4/4b/AD_Icon.png/80px-AD_Icon.png",
@@ -80,59 +133,6 @@
         "name": "Musical Inspiration",
         "stats": {
           "Fire Rate": 0.25
-        }
-      }
-    ],
-    "B": [
-      {
-        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/6f/Scaler.png/80px-Scaler.png",
-        "name": "Living Projectile",
-        "stats": {
-          "Projectile Shot": 1,
-          "Fire Rate": -0.20
-        }
-      },
-      {
-        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/1/11/Sk.png/80px-Sk.png",
-        "name": "Sack",
-        "stats": {
-          "Money Obtained": 0.45
-        }
-      },
-      {
-        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c7/Deter.png/80px-Deter.png",
-        "name": "Determination",
-        "stats": {
-          "Projectile Damage": 0.60
-        }
-      },
-      {
-        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/9/9a/SCh.png/80px-SCh.png",
-        "name": "Spectral Channeling",
-        "stats": {
-          "Money Obtained": 0.20,
-          "XP Obtained": 0.20
-        }
-      },
-      {
-        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/6/6b/WGo.png/80px-WGo.png",
-        "name": "Wind Golem",
-        "stats": {
-          "Knockback": 0.50
-        }
-      },
-      {
-        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/1/1e/LSt.png/80px-LSt.png",
-        "name": "Launch Staff",
-        "stats": {
-          "Projectile Speed": 0.45
-        }
-      },
-      {
-        "icon": "https://static.wikitide.net/desktopdefenderwiki/thumb/c/c8/SHan.png/80px-SHan.png",
-        "name": "Steady Hand",
-        "stats": {
-          "Aim Cone": -35
         }
       }
     ],
