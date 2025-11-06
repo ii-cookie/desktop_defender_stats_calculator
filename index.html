@@ -206,9 +206,9 @@
         return 0.75 * (1 - Math.pow((400 - x) / 400, 3)); }
     function firerate(weapon_firerate,firerate_level,loot_firerate,weapon_name) {
         const calculatedFirerate = (1/weapon_firerate)*(1-(firerate_upgrade(firerate_level)+loot_firerate));
-        const minimumFirerate  = weapon_name?.toLowerCase()==='flamethrower'?1/60:0.1;
+        const minimumFirerate  = ['flamethrower', 'electromagnetism'].includes(weapon_name?.toLowerCase())?1/100:0.1;
         return {display:calculatedFirerate, capped:Math.max(calculatedFirerate,minimumFirerate)};
-    }
+    }   
     function projectiles_per_shot(extra_projectile_level,loot_projectile) { return 1 + Math.ceil((extra_projectile_level-1)*1.5) + loot_projectile; }
     function total_damage_per_shot(level,weapon_damage,weapon_added_mult,damage_level,flat_level,loot_percentage,loot_damage,extra_projectile_level,loot_projectile) { return damage(level,weapon_damage,weapon_added_mult,damage_level,flat_level,loot_percentage,loot_damage)*projectiles_per_shot(extra_projectile_level,loot_projectile); }
     function damage_per_second(total_damage,firerate) { return total_damage/firerate; }
@@ -354,7 +354,7 @@
         document.getElementById('result-damage').textContent = dmg.toFixed(6);
         document.getElementById('result-projectiles').textContent = Math.floor(proj);
         document.getElementById('result-firerate').textContent =
-            fr.display < (selectedWeapon.name.toLowerCase()==='flamethrower'?1/60:0.1)
+            fr.display < (['flamethrower', 'electromagnetism'].includes(selectedWeapon.name.toLowerCase())?1/100:0.1)
             ? `${fr.display.toFixed(6)} (min firerate reached)`
             : fr.display.toFixed(6);
         document.getElementById('result-total-damage').textContent = tot.toFixed(6);
