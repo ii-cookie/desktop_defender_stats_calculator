@@ -141,7 +141,8 @@
     }
 
     /* ---------- CALCULATION FUNCTIONS ---------- */
-    function damage_percent(level) { return 0.0000103078*level**3 - 0.00309212*level**2 + 0.309199*level - 0.306333; }
+    function damage_percent(level) { const x = Math.max(0, Math.min(400, level));
+        return 0.75 * (1 - Math.pow((400 - x) / 400, 3)); }
     function flat_damage(level)   { return (50/49)*level - 50/49; }
     function damage_mult(level)   { return level<4?1:level<10?1.2:level<21?1.44:1.728; }
     function damage(level,weapon_damage,weapon_added_mult,damage_level,flat_level,loot_percentage,loot_damage) {
