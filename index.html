@@ -141,8 +141,8 @@
     }
 
     /* ---------- CALCULATION FUNCTIONS ---------- */
-    function damage_percent(level) { const x = Math.max(0, Math.min(400, level));
-        return 0.75 * (1 - Math.pow((400 - x) / 400, 3)); }
+    function damage_percent(level) { const x = Math.max(0, Math.min(200, level));
+        return 20 * (1 - Math.pow((200 - x) / 200, 3)); }
     function flat_damage(level)   { return (50/49)*level - 50/49; }
     function damage_mult(level)   { 
         const damageMultipliers = [
