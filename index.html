@@ -276,6 +276,9 @@
     function openPopup(slotIndex) {
         lootPopup.style.display = 'flex';
         lootPopupContent.dataset.idx = slotIndex;
+        const search = document.getElementById('loot-search');
+        search.focus();
+        search.select();
     }
 
     /* ---------- POPUP ---------- */
