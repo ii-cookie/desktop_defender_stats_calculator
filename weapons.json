@@ -138,8 +138,8 @@
   {
   "name": "Flamethrower",
   "stats": {
-  "Damage": 0.015,
-  "Added Damage Mult": 0.1,
+  "Damage": 0.03,
+  "Added Damage Mult": 0.2,
   "Fire Rate": 50,
   "Aim Cone": 60,
   "Speed": 20,
@@ -240,8 +240,8 @@
   {
   "name": "Electromagnetism",
   "stats": {
-  "Damage": 0.01,
-  "Added Damage Mult": 0.1,
+  "Damage": 0.02,
+  "Added Damage Mult": 0.2,
   "Fire Rate": 50,
   "Aim Cone": 60,
   "Speed": 20,
