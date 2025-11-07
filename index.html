@@ -203,41 +203,46 @@
     /* ---------- CALCULATION FUNCTIONS ---------- */
     // PlayerUpgrades.StatData → JavaScript (infinite repeat)
     function evaluateValue(level, startValue, endValue, maxLevel, infiniteRepeat) {
+    // -----------------------------------------------------------------
+    // 1. NON-INFINITE (unchanged)
+    // -----------------------------------------------------------------
+    const curve = (x) => (endValue - startValue) *
+        (1 - Math.pow((maxLevel - x) / maxLevel, 3)) + startValue;
 
-        // 20 * (1 - ((200 - x)/200)^3)
-        const curve = (x) => (endValue - startValue) * (1 - Math.pow((maxLevel - x) / maxLevel, 3)) + startValue;
+    if (!infiniteRepeat) {
+        level = Math.max(1, Math.min(level, maxLevel));
+        if (level === 1) return startValue;
+        if (level === maxLevel) return endValue;
 
-        if (!infiniteRepeat) {
-            level = Math.max(1, Math.min(level, maxLevel));
-            if (level === 1) {
-                return startValue;
-            }
-            if (level === maxLevel) {
-                return endValue;
-            }
-            const num = (level - 1) / (maxLevel - 1);
-            return curve(num);
-        }
-
-        // ——— INFINITE REPEAT ———
-        if (maxLevel <= 1) {
-            // Edge case: every level adds the full delta
-            const delta = endValue - startValue;
-            const extra = Math.max(0, level - 1);
-            return startValue + extra * delta;
-        }
-
-        const cycleLength = Math.max(1, maxLevel - 1);           // 199
-        const fullCycles  = Math.floor((level - 1) / cycleLength);
-        const posInCycle  = ((level - 1) % cycleLength) + 1;     // 1 … 200
-
-        // Value inside the current cycle using YOUR curve
-        const valueInCycle = curve(posInCycle);
-
-        // Total = start + full cycles × delta + (progress inside cycle)
-        const deltaPerCycle = endValue - startValue;
-        return startValue + fullCycles * deltaPerCycle + (valueInCycle - startValue);
+        const t = (level - 1) / (maxLevel - 1);
+        return curve(t);
     }
+
+    // -----------------------------------------------------------------
+    // 2. INFINITE REPEAT – NEW IMPLEMENTATION
+    // -----------------------------------------------------------------
+    if (maxLevel <= 1) {
+        // every level adds the full delta
+        const delta = endValue - startValue;
+        return startValue + Math.max(0, level - 1) * delta;
+    }
+
+    const MaxEffect   = endValue - startValue;          // Δ
+    const cycleLen    = maxLevel - 1;                   // e.g. 199
+    const fullCycles  = Math.floor((level - 1) / cycleLen);
+    const remainder   = (level - 1) % cycleLen;         // 0 … cycleLen-1
+
+    // progress inside the current cycle: 0 → 0, cycleLen-1 → 1
+    const p = remainder / cycleLen;                     // 0 … 1 (almost)
+
+    // 1 - (1-p)^3  → smooth cubic rise from 0 to 1
+    const cubic = 1 - Math.pow(1 - p, 3);
+
+    // f_inf(x) = MaxEffect * (cubic + fullCycles)
+    const value = MaxEffect * (cubic + fullCycles) + startValue;
+
+    return value;
+}
     function damage_percent(level) { 
         const startValue = 0;
         const endValue   = 20;
@@ -268,6 +273,8 @@
                 break;
             }
         }
+        console.log(flat);
+        console.log(level);
         return (50/49)*flat - 50/49; 
     }
     function damage_mult(level)   { 
