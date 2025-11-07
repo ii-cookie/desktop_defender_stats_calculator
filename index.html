@@ -228,7 +228,7 @@
         }
 
         const cycleLength = Math.max(1, maxLevel - 1);           // 199
-        const fullCycles  = (level - 1) / cycleLength;
+        const fullCycles  = Math.floor((level - 1) / cycleLength);
         const posInCycle  = ((level - 1) % cycleLength) + 1;     // 1 … 200
 
         // Value inside the current cycle using YOUR curve
