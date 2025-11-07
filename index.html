@@ -486,14 +486,14 @@
 
         const details = document.getElementById('calc-details');
         details.innerHTML = `
-            damage upgrade = ${damage_percent(damage_level).toFixed(4)}<br>
-            flat damage = ${flat_damage(flat_level).toFixed(4)}<br>
-            damage mult = ${damage_mult(level).toFixed(4)}<br>
-            fire rate upgrade = ${firerate_upgrade(firerate_level).toFixed(4)}<br>
-            loot projectile damage = ${loot_percentage.toFixed(4)}<br>
-            loot shot damage = ${loot_damage.toFixed(4)}<br>
+            damage upgrade = ${damage_percent(damage_level)}<br>
+            flat damage = ${flat_damage(flat_level)}<br>
+            damage mult = ${damage_mult(level)}<br>
+            fire rate upgrade = ${firerate_upgrade(firerate_level)}<br>
+            loot projectile damage = ${loot_percentage}<br>
+            loot shot damage = ${loot_damage}<br>
             loot projectile = ${loot_projectile}<br>
-            loot fire rate = ${loot_firerate.toFixed(4)}
+            loot fire rate = ${loot_firerate}
         `;
 
         document.getElementById('result-damage').textContent = dmg.toFixed(6);
