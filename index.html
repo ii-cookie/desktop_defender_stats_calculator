@@ -160,17 +160,49 @@
     }
 
     /* ---------- CALCULATION FUNCTIONS ---------- */
+    // PlayerUpgrades.StatData → JavaScript (infinite repeat)
+    function evaluateValue(level, startValue, endValue, maxLevel, infiniteRepeat) {
+
+        // Helper: your custom curve 20 * (1 - ((200 - x)/200)^3)
+        const curve = (x) => (endValue - startValue) * (1 - Math.pow((maxLevel - x) / maxLevel, 3)) + startValue;
+
+        if (!infiniteRepeat) {
+            level = Math.max(1, Math.min(level, maxLevel));
+            if (level === 1) {
+                return startValue;
+            }
+            if (level === maxLevel) {
+                return endValue;
+            }
+            const num = (level - 1) / (maxLevel - 1);
+            return curve(num);
+        }
+
+        // ——— INFINITE REPEAT ———
+        if (maxLevel <= 1) {
+            // Edge case: every level adds the full delta
+            const delta = endValue - startValue;
+            const extra = Math.max(0, level - 1);
+            return startValue + extra * delta;
+        }
+
+        const cycleLength = Math.max(1, maxLevel - 1);           // 199
+        const fullCycles  = Math.floor((level - 1) / cycleLength);
+        const posInCycle  = ((level - 1) % cycleLength) + 1;     // 1 … 200
+
+        // Value inside the current cycle using YOUR curve
+        const valueInCycle = curve(posInCycle);
+
+        // Total = start + full cycles × delta + (progress inside cycle)
+        const deltaPerCycle = endValue - startValue;
+        return startValue + fullCycles * deltaPerCycle + (valueInCycle - startValue);
+    }
     function damage_percent(level) { 
-        const x = Math.max(0, Math.min(200, level));
-        result = 20 * (1 - Math.pow((200 - x) / 200, 3));
-        if (level < 200) {
-            return result; 
-        }
-        excess = level - 200;
-        for (let i = 0; i < excess; i++){
-            result += 0.1;
-        }
-        return result;
+        const startValue = 0;
+        const endValue   = 20;
+        const maxLevel   = 200;
+        const infiniteRepeat = true;
+        return evaluateValue(level, startValue, endValue, maxLevel, infiniteRepeat);
     }
     function flat_damage(level, player_level)   { 
         const levelUpgrades = [
