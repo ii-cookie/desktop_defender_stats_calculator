@@ -14,36 +14,43 @@
         /* ---- LOOT STATS TOOLTIP ---- */
         .loot-card { position: relative; }
         .loot-tooltip {
-            position: absolute;
-            top: 50%; right: 100%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(31,41,55,0.98);
+        backdrop-filter: blur(12px);
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid #4b5563;
+        font-size: 11px;
+        color: #e5e7eb;
+        white-space: nowrap;
+        z-index: 100;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.2s, transform 0.2s;
+        pointer-events: none;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+        /* Default: show on LEFT */
+        .loot-tooltip {
+            right: 100%;
             transform: translateY(-50%) translateX(-8px);
-            background: rgba(31,41,55,0.98);
-            backdrop-filter: blur(12px);
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid #4b5563;
-            font-size: 11px;
-            color: #e5e7eb;
-            white-space: nowrap;
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.2s, transform 0.2s;
-            pointer-events: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
+
+        /* Flip to RIGHT for first column */
+        .loot-card:first-child .loot-tooltip,
+        .loot-card:nth-child(5n+1) .loot-tooltip {
+            left: 100%;
+            right: auto;
+            transform: translateY(-50%) translateX(8px);
+        }
+
+        /* Hover show */
         .loot-card:hover .loot-tooltip {
             opacity: 1;
             visibility: visible;
-            transform: translateY(-50%) translateX(-12px);
-        }
-        .loot-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 50%; left: 100%;
-            transform: translateY(-50%);
-            border: 6px solid transparent;
-            border-left-color: rgba(31,41,55,0.98);
         }
         /* ---- LOOT SLOT ---- */
         .loot-slot {
