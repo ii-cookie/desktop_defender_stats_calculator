@@ -326,7 +326,7 @@
         const searchInput = document.getElementById('loot-search');
 
         /* loot cards */
-        const rarityColor = {C:'text-blue-300',B:'text-orange-500',D:'text-green-500',E:'text-blue-600'};
+        const rarityColor = {S:'text-yellow-300',A:'text-magenta-300',B:'text-blue-500',C:'text-green-600',D:'text-white-500',E:'text-gray-600'};
         Object.values(data.loot).flat().forEach(loot => {
             const rarity = Object.keys(data.loot).find(key=>data.loot[key].some(item=>item.name===loot.name));
             const card = document.createElement('div');
@@ -335,7 +335,7 @@
             card.innerHTML = `
                 <img src="${loot.icon}" class="w-10 h-10 mb-1 object-contain">
                 <span class="text-xs text-gray-100">${loot.name}</span>
-                <span class="text-xs ${rarityColor[rarity]||'text-gray-400'}">Rarity: ${rarity}</span>`;
+                <span class="text-xs ${rarityColor[rarity]||'text-cyan-400'}">Rarity: ${rarity}</span>`;
             card.onclick = () => {
                 const slotIndex = +lootPopupContent.dataset.idx;
                 setSlot(slotIndex, loot);
