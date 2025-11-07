@@ -11,6 +11,40 @@
         #loot-popup-content { max-height:80vh; overflow-y:auto; }
         #loot-popup-content::-webkit-scrollbar { display:none; }
         #loot-popup-content { -ms-overflow-style:none; scrollbar-width:none; }
+        /* ---- LOOT STATS TOOLTIP ---- */
+        .loot-card { position: relative; }
+        .loot-tooltip {
+            position: absolute;
+            top: 50%; right: 100%;
+            transform: translateY(-50%) translateX(-8px);
+            background: rgba(31,41,55,0.98);
+            backdrop-filter: blur(12px);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #4b5563;
+            font-size: 11px;
+            color: #e5e7eb;
+            white-space: nowrap;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+        .loot-card:hover .loot-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-50%) translateX(-12px);
+        }
+        .loot-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 100%;
+            transform: translateY(-50%);
+            border: 6px solid transparent;
+            border-left-color: rgba(31,41,55,0.98);
+        }
         /* ---- LOOT SLOT ---- */
         .loot-slot {
             position: relative;
@@ -364,10 +398,15 @@
             const card = document.createElement('div');
             card.className='loot-card bg-gray-800 p-2 rounded shadow-md flex flex-col items-center text-sm cursor-pointer hover:bg-gray-700';
             card.dataset.name = loot.name.toLowerCase();
+            const stats = Object.entries(loot.stats || {})
+                .map(([k,v]) => `${k}: ${v}`)
+                .join('<br>') || 'No stats';
+
             card.innerHTML = `
                 <img src="${loot.icon}" class="w-10 h-10 mb-1 object-contain">
                 <span class="text-xs text-gray-100">${loot.name}</span>
-                <span class="text-xs ${rarityColor[rarity]||'text-cyan-400'}">Rarity: ${rarity}</span>`;
+                <span class="text-xs ${rarityColor[rarity]||'text-cyan-400'}">Rarity: ${rarity}</span>
+                <div class="loot-tooltip">${stats}</div>`;
             card.onclick = () => {
                 const slotIndex = +lootPopupContent.dataset.idx;
                 setSlot(slotIndex, loot);
