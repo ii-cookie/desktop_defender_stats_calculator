@@ -252,6 +252,7 @@
     }
     function flat_damage(level, player_level)   { 
         const levelUpgrades = [
+            // [49, 1],        //TEST
             [70, 1],
             [73, 1],
             [81, 1],
@@ -285,7 +286,7 @@
             [32, 1.1],
             [40, 1.15],
             [45, 1.2],
-            [49, 1.1],
+            // [49, 1.1],       // BUG:: lv reward dont match, prob wait for patch notes
             [54, 1.1],
             [63, 1.25],
             [66, 1.2],
@@ -309,9 +310,8 @@
         }
         return mult;    
     }
-    // =====================HARD CODED /1.1 HERE CUZ I DONT KNOW WHERE THAT ACTUAL MULTIPLIER CAME FROM===================
     function damage(level,weapon_damage,weapon_added_mult,damage_level,flat_level,loot_percentage,loot_damage) {
-        return ((weapon_damage + (flat_damage(flat_level)+loot_damage)*weapon_added_mult) * damage_mult(level) * (1 + damage_percent(damage_level) + loot_percentage) / 1.1 );
+        return ((weapon_damage + (flat_damage(flat_level)+loot_damage)*weapon_added_mult) * damage_mult(level) * (1 + damage_percent(damage_level) + loot_percentage) );
     }
     function firerate_upgrade(level) { const x = Math.max(0, Math.min(400, level));
         return 0.75 * (1 - Math.pow((400 - x) / 400, 3)); }
