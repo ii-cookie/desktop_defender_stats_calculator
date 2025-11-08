@@ -41,7 +41,8 @@
 
         /* Flip to RIGHT for first column */
         .loot-card:first-child .loot-tooltip,
-        .loot-card:nth-child(5n+1) .loot-tooltip {
+        .loot-card:nth-child(5n+1) .loot-tooltip,
+        .loot-card.first-in-row .loot-tooltip {
             left: 100%;
             right: auto;
             transform: translateY(-50%) translateX(8px);
@@ -378,6 +379,7 @@
         const search = document.getElementById('loot-search');
         search.focus();
         search.select();
+        searchInput.dispatchEvent(new Event('input'));
     }
 
     /* ---------- POPUP ---------- */
@@ -433,12 +435,25 @@
         /* search functionality */
         searchInput.oninput = () => {
             const query = searchInput.value.toLowerCase();
-            lootPopupContent.querySelectorAll('.loot-card').forEach(card => {
-                if (!query) {
+            const cards = lootPopupContent.querySelectorAll('.loot-card');
+            const visibleCards = [];
+
+            cards.forEach(card => {
+                if (!query || new RegExp(query.split('').join('.*')).test(card.dataset.name)) {
                     card.style.display = 'flex';
+                    visibleCards.push(card);
                 } else {
-                    const regex = new RegExp(query.split('').join('.*'));
-                    card.style.display = regex.test(card.dataset.name) ? 'flex' : 'none';
+                    card.style.display = 'none';
+                }
+            });
+
+            // Remove old first-in-row markers
+            cards.forEach(c => c.classList.remove('first-in-row'));
+
+            // Mark new first-in-row (every 5th visible card, starting at 0)
+            visibleCards.forEach((card, i) => {
+                if (i % 5 === 0) {
+                    card.classList.add('first-in-row');
                 }
             });
         };
