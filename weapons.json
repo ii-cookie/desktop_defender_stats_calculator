@@ -106,7 +106,7 @@
   {
   "name": "Shuriken",
   "stats": {
-  "Damage": 0.3,
+  "Damage": 0.5,
   "Added Damage Mult": 1,
   "Fire Rate": 3,
   "Aim Cone": 10,
@@ -272,8 +272,8 @@
   {
   "name": "Orbit",
   "stats": {
-  "Damage": 1,
-  "Added Damage Mult": 1.48,
+  "Damage": 2,
+  "Added Damage Mult": 2,
   "Fire Rate": 1,
   "Aim Cone": 5,
   "Speed": 8,
