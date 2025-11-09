@@ -409,7 +409,7 @@
         const searchInput = document.getElementById('loot-search');
 
         /* loot cards */
-        const rarityColor = {S:'text-yellow-300',A:'text-magenta-300',B:'text-blue-500',C:'text-green-600',D:'text-white-500',E:'text-gray-600'};
+        const rarityColor = {S:'text-yellow-300',A:'text-rose-700',B:'text-blue-500',C:'text-green-600',D:'text-white-500',E:'text-gray-600'};
         Object.values(data.loot).flat().forEach(loot => {
             const rarity = Object.keys(data.loot).find(key=>data.loot[key].some(item=>item.name===loot.name));
             const card = document.createElement('div');
