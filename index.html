@@ -266,10 +266,13 @@
             [137, 1],
             [143, 1]
         ]
-        if (player_level < 70) return (50/49)*level - 50/49; 
-        let flat = level;
+        result = (50/49)*level - 50/49
+        if (player_level < 70) return result; 
+
+        // theory testing: started inf loop = no more 50/49
+        let flat = result;
         for (let [threshold, f] of levelUpgrades) {
-            if (level >= threshold) {
+            if (player_level >= threshold) {
                 flat += f;
             } else {
                 break;
@@ -277,7 +280,7 @@
         }
         console.log(flat);
         console.log(level);
-        return (50/49)*flat - 50/49; 
+        return flat; 
     }
     function damage_mult(level)   { 
         const levelUpgrades = [
